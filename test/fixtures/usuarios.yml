@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  login: MyString
+  apellido_paterno: MyString
+  apellido_materno: MyString
+  fecha_alta: 2011-09-19
+  email: MyString
+
+two:
+  login: MyString
+  apellido_paterno: MyString
+  apellido_materno: MyString
+  fecha_alta: 2011-09-19
+  email: MyString

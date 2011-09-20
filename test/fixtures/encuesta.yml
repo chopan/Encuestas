@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creador: 
+  nombre: MyString
+  descripcion: MyText
+  presentacion: MyText
+  fecha_creacion: 2011-09-19 13:36:12
+  fecha_inicio: 2011-09-19 13:36:12
+  fecha_fin: 2011-09-19 13:36:12
+  activa: false
+  autenticada: false
+  campos_numerados: 1
+
+two:
+  creador: 
+  nombre: MyString
+  descripcion: MyText
+  presentacion: MyText
+  fecha_creacion: 2011-09-19 13:36:12
+  fecha_inicio: 2011-09-19 13:36:12
+  fecha_fin: 2011-09-19 13:36:12
+  activa: false
+  autenticada: false
+  campos_numerados: 1

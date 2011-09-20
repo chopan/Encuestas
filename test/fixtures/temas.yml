@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  encuesta: 
+  orden: 1
+  tema: MyString
+
+two:
+  encuesta: 
+  orden: 1
+  tema: MyString
