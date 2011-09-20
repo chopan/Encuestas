@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920190617) do
+ActiveRecord::Schema.define(:version => 20110920192805) do
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(:version => 20110920190617) do
     t.string   "nombre",      :limit => 50
     t.string   "descripcion", :limit => 300
     t.string   "tipo",        :limit => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "respuesta", :force => true do |t|
+    t.integer  "pregunta_id"
+    t.string   "contenido"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

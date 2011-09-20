@@ -2,6 +2,7 @@ Encuestas::Application.routes.draw do
   delete "logout" => "usuario_sessions#destroy", :as => :logout
   resource :usuario_session
   resources :usuarios
+  resources :encuestas
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

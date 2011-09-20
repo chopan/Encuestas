@@ -1,0 +1,13 @@
+<%= form_for(@encuesta, :url => new_encuesta_path) do |f| %>
+
+  <p>
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </p>
+  <%= f.fields_for :preguntas do |builder| %>
+    <%= render "preguntas", :f => builder %>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+
