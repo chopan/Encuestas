@@ -5,8 +5,8 @@ class CreatePregunta < ActiveRecord::Migration
       t.references  :tema
       t.references  :pregunta_tipo
       t.text        :texto
-      t.activa      :boolean
-      t.order       :integer
+      t.boolean     :activa
+      t.integer     :order
       t.string      :orientacion,       :limit => 3
       t.integer     :min_opc_select
       t.integer     :max_opc_select
