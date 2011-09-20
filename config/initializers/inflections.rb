@@ -7,4 +7,10 @@
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
+
+	ActiveSupport::Inflector.inflections do |inflect|
+
+  inflect.irregular "rol", "roles"
+
+end
 # end

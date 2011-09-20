@@ -7,12 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if current_usuario_session %>
+	<% if current_usuario_session %>
               <li><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
              <% else %>
-              <li><%= link_to "Iniciar sesion", new_user_session_path %></li>
-            <% end %>
+              <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
+          <% end %>
 <%= yield %>
-dfdghg
+
 </body>
 </html>

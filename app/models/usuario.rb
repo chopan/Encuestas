@@ -4,4 +4,6 @@ class Usuario < ActiveRecord::Base
     #Configuration Options
     config.crypto_provider = Authlogic::CryptoProviders::MD5
   end
+
+easy_roles :roles
 end

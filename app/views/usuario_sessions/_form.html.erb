@@ -1,0 +1,27 @@
+<%= form_for(@usuario_session, :url => usuario_session_url) do |f| %>
+  <% if @usuario_session.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h2>Imposible registrar usuario</h2>
+
+      <ul>
+      <% @usuario_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<fieldset class="inputs">
+  <div class="field">
+    <%= f.label :login,"Usuario" %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Contraseña" %><br />
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Login'%>
+  </div>
+</fieldset>
+<% end %>

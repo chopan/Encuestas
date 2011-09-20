@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_usuario_session, :current_usuario
 
-  protected
-	 def current_usuario_session
+ protected
+  def current_usuario_session
     @current_usuario_session ||= UsuarioSession.find
   end
 
@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_usuario_session
-      flash[:notice] = "Debe de iniciar sesión"
-      redirect_to new_usuario_sesion_path
+     
+      redirect_to new_usuario_session_path
       return false
     end
   end
