@@ -3,15 +3,29 @@
 <head>
   <title>Encuestas</title>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag   "application" %>
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    
+      function remove_fields(link) {
+        $(link).prev("input[type=hidden]").val("1");
+        $(link).closest(".fields").hide();
+      }
+      function add_fields(link, association, content) {
+        var new_id = new Date().getTime();
+        var regexp = new RegExp("new_" + association, "g")
+        $(link).parent().before(content.replace(regexp, new_id));
+      }
+  </script>
+
 </head>
 <body>
 	<% if current_usuario_session %>
-              <li><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
-             <% else %>
+              <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
+        <% else %>
               <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
-          <% end %>
+        <% end %>
 <%= yield %>
 
 </body>

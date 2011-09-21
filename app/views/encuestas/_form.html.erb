@@ -1,12 +1,14 @@
-<%= form_for(@encuesta, :url => new_encuesta_path) do |f| %>
+<%= form_for(@encuesta, :url => encuestas_path, :method => :post) do |f| %>
 
   <p>
     <%= f.label :nombre %><br />
     <%= f.text_field :nombre %>
   </p>
+  <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>
   <% end %>
+
   <p><%= f.submit "Submit" %></p>
 <% end %>
 

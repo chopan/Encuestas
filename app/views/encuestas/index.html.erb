@@ -1,0 +1,6 @@
+<% @encuestas.each do |encuesta| %>
+  <%= encuesta.nombre %>
+  <%= encuesta.preguntas.each do |pregunta| %>
+    <%= pregunta.texto %>
+  <% end %>
+<% end %>
