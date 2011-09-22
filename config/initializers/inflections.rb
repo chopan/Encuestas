@@ -11,6 +11,7 @@
 	ActiveSupport::Inflector.inflections do |inflect|
 
   inflect.irregular "rol", "roles"
+  inflect.irregular "opcion", "opciones"
 
 end
 # end

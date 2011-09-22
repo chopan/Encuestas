@@ -4,8 +4,8 @@
   <%= f.text_area :texto, :rows => 3 %>
   <%= link_to_remove_fields "Eliminar", f %>
 </p>
-<%= f.fields_for :respuestas do |builder| %>
-  <%= render 'respuestas', :f => builder %>
+<%= f.fields_for :opciones do |builder| %>
+  <%= render 'opciones', :f => builder %>
 <% end %>
-<p><%= link_to_add_fields "Agregar opcion", f, :respuestas %></p>
+<p><%= link_to_add_fields "Agregar opcion", f, :opciones %></p>
 </div>

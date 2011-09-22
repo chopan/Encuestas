@@ -1,0 +1,15 @@
+<%= form_for(@encuesta, :url => capturar_url, :method => :post) do |f| %>
+  Encuesta: <%= @encuesta.nombre %>
+  <% @encuesta.preguntas.each do |pregunta| %>
+  <br/>
+    <%= pregunta.texto %>
+    <div>
+    <% pregunta.opciones.each do |opcion| %>
+      <%=radio_button("encuesta",pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
+
+      <%= opcion.contenido %>
+    <% end %>
+  </div>
+  <% end %>
+  <%= f.submit "Guardar"  %>
+<% end %>

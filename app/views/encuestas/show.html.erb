@@ -6,8 +6,8 @@ Encuesta: <%=  @encuesta.nombre %>
   <%=  "#{x}) #{pregunta.texto}" %>
   <% x += 1 %>
   <% y = 1 %>
-  <% pregunta.respuestas.each do |respuesta| %>
-    <%=  "#{y}) #{respuesta.contenido}" %>
+  <% pregunta.opciones.each do |opcion| %>
+    <%=  "#{y}) #{opcion.contenido}" %>
     <% y += 1 %>
   <% end %>
 <% end %>

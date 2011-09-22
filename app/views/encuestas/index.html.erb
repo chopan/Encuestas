@@ -1,6 +1,10 @@
 <% @encuestas.each do |encuesta| %>
+<div>
   <%= encuesta.nombre %>
-  <%= encuesta.preguntas.each do |pregunta| %>
+  <%  encuesta.preguntas.each do |pregunta| %>
     <%= pregunta.texto %>
   <% end %>
+  <%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%>
+  <%= link_to "Contestar",contestar_url(encuesta) %>
+</div>
 <% end %>

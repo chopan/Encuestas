@@ -3,6 +3,9 @@ Encuestas::Application.routes.draw do
   resource :usuario_session
   resources :usuarios
   resources :encuestas
+
+  get "encuestas/contestar/:id" => "encuestas#contestar", :as => :contestar
+  post "encuestas/capturar_datos" => "encuestas#capturar_datos", :as => :capturar
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
