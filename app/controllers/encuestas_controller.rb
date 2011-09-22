@@ -19,7 +19,7 @@ def create
   end
   if @encuesta.save
     flash[:notice] = "Encuesta guardada correctamente"
-    redirect_to encuestas_path
+    redirect_to encuesta_path(@encuesta)
   else
     render 'new'
   end
@@ -31,6 +31,16 @@ end
 
 def edit
   @encuesta = Encuesta.find(params[:id])
+end
+
+def update
+  @encuesta = Encuesta.find(params[:id])
+  if @encuesta.update_attributes(params[:encuesta])
+    flash[:notice] = "Encuesta editada correctamente"
+    redirect_to encuesta_url(@encuesta)
+  else
+    render 'edit'
+  end
 end
 
 end
