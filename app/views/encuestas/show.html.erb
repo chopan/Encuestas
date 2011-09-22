@@ -1,0 +1,13 @@
+
+Encuesta: <%=  @encuesta.nombre %>
+<% x = 1 %>
+<%  @encuesta.preguntas.each do |pregunta| %>
+  <br/>
+  <%=  "#{x}) #{pregunta.texto}" %>
+  <% x += 1 %>
+  <% y = 1 %>
+  <% pregunta.respuestas.each do |respuesta| %>
+    <%=  "#{y}) #{respuesta.contenido}" %>
+    <% y += 1 %>
+  <% end %>
+<% end %>

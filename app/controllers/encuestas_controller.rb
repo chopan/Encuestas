@@ -24,4 +24,13 @@ def create
     render 'new'
   end
 end
+
+def show
+  @encuesta = Encuesta.find(params[:id])
+end
+
+def edit
+  @encuesta = Encuesta.find(params[:id])
+end
+
 end
