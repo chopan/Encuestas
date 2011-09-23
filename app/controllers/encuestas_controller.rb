@@ -2,6 +2,9 @@ class EncuestasController < ApplicationController
 
  def index
    @encuestas = Encuesta.all
+   puts 555555
+   puts request.cookies
+   
  end
 
 def new
@@ -64,6 +67,7 @@ end
 
 def capturar_datos
  estado = true
+ sesion_id = request.session[:session_id]
  params[:encuesta].values.each do |opcion_id|
    respuesta = Respuesta.new
    opcion = Opcion.find(opcion_id)

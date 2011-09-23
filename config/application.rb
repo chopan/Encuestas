@@ -44,5 +44,10 @@ module Encuestas
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Sesiones con ActiveRecordStore
+    ActiveRecord::SessionStore::Session.table_name = 'sessions'
+    ActiveRecord::SessionStore::Session.primary_key = 'id'
+    ActiveRecord::SessionStore::Session.data_column_name = 'data'
   end
 end
