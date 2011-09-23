@@ -6,6 +6,7 @@ Encuestas::Application.routes.draw do
 
   get "encuestas/contestar/:id" => "encuestas#contestar", :as => :contestar
   post "encuestas/capturar_datos" => "encuestas#capturar_datos", :as => :capturar
+  get "encuestas/resultados/grafica_resultados" => "encuestas#grafica_resultados", :as => :grafica_resultados
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
