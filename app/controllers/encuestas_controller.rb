@@ -89,6 +89,6 @@ def capturar_datos
 end
 
   def grafica_resultados
-    
+    @encuesta = Encuesta.find(params[:id])
   end
 end

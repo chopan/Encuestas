@@ -1,13 +1,16 @@
 <script>
-  var chart;
+  <% o = 0 %>
 $(document).ready(function() {
+  <% @encuesta.preguntas.each do |pregunta| %>
+      var chart;
+      <% o += 1 %>
     chart = new Highcharts.Chart({
         chart: {
-                renderTo: 'container',
+                renderTo: 'container<%= o %>',
                 defaultSeriesType: 'bar'
         },
         title: {
-                text: 'Aplicación de ejemplo'
+                text: '<%= pregunta.texto %>'
         },
         subtitle: {
                 text: 'Source: <a href="http://www.uach.mx">'+
@@ -15,8 +18,8 @@ $(document).ready(function() {
         },
 
       xAxis: {
-         categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-         //categories: [<!--% @categorias.each do |categoria| %--> '<!--%= categoria.nombre %-->',<!--%end%-->]
+        
+        categories: [<% pregunta.opciones.each do |opcion| %> '<%= opcion.contenido %>',<%end%>],
          title: {
             text: null
          }
@@ -24,14 +27,14 @@ $(document).ready(function() {
       yAxis: {
          min: 0,
          title: {
-            text: 'Population (millions)',
-            align: 'high'
+            text: '',
+            align: ''
          }
       },
       tooltip: {
          formatter: function() {
             return ''+
-                this.series.name +': '+ this.y +' millions';
+                this.series.name +': '+ this.y +' respuestas';
          }
       },
       plotOptions: {
@@ -56,23 +59,25 @@ $(document).ready(function() {
          enabled: false
       },
            series: [{
-             //name: 'Nombre de las series',
+             name: 'Frecuencia',
              //data: [<!--%@series.each do |serie|%--> <!--%= serie.resultado.count%-->,<!--%end%-->]
 
-
-         name: 'Year 1800',
-         data: [107, 31, 635, 203, 2]
-      }, {
-         name: 'Year 1900',
-         data: [133, 156, 947, 408, 6]
-      }, {
-         name: 'Year 2008',
-         data: [973, 914, 4054, 732, 34]
-      }]
+            data: [<% pregunta.opciones.each do |opcion| %> <%= opcion.respuestas.count %>,<%end%>]
+   }]
     });
+<% end %>
 
 });
 </script>
-
-
 <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+<% o = 0 %>
+<% @encuesta.preguntas.each do  %>
+<% o += 1 %>
+<div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
+<% end %>
+
+
+<script>
+  $("#container").hide();
+
+</script>
