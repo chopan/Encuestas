@@ -87,4 +87,8 @@ def capturar_datos
  end
   
 end
+
+  def grafica_resultados
+    
+  end
 end

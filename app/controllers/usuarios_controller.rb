@@ -33,11 +33,11 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.find(params[:id])
     respond_to do |format|
       if @usuario.update_attributes(params[:usuario])
-        format.html { redirect_to @usuario, notice: 'Usuario actualizado correctamente.' }
+        format.html { redirect_to @usuario, :notice=> 'Usuario actualizado correctamente.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action=> "edit" }
+        format.json { render json=> @user.errors, status=> :unprocessable_entity }
       end
     end
   end

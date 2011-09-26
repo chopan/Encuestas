@@ -1,0 +1,78 @@
+<script>
+  var chart;
+$(document).ready(function() {
+    chart = new Highcharts.Chart({
+        chart: {
+                renderTo: 'container',
+                defaultSeriesType: 'bar'
+        },
+        title: {
+                text: 'Aplicación de ejemplo'
+        },
+        subtitle: {
+                text: 'Source: <a href="http://www.uach.mx">'+
+                        'UACH</a>'
+        },
+
+      xAxis: {
+         categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+         //categories: [<!--% @categorias.each do |categoria| %--> '<!--%= categoria.nombre %-->',<!--%end%-->]
+         title: {
+            text: null
+         }
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Population (millions)',
+            align: 'high'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ this.y +' millions';
+         }
+      },
+      plotOptions: {
+         bar: {
+            dataLabels: {
+               enabled: true
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'right',
+         verticalAlign: 'top',
+         x: -100,
+         y: 100,
+         floating: true,
+         borderWidth: 1,
+         backgroundColor: Highcharts.theme.legendBackgroundColor || '#FFFFFF',
+         shadow: true
+      },
+      credits: {
+         enabled: false
+      },
+           series: [{
+             //name: 'Nombre de las series',
+             //data: [<!--%@series.each do |serie|%--> <!--%= serie.resultado.count%-->,<!--%end%-->]
+
+
+         name: 'Year 1800',
+         data: [107, 31, 635, 203, 2]
+      }, {
+         name: 'Year 1900',
+         data: [133, 156, 947, 408, 6]
+      }, {
+         name: 'Year 2008',
+         data: [973, 914, 4054, 732, 34]
+      }]
+    });
+
+});
+</script>
+
+
+<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
