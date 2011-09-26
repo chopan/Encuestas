@@ -1,4 +1,6 @@
 class Pregunta < ActiveRecord::Base
+  validates :texto, :presence=>true
+
   belongs_to :encuesta
   belongs_to :pregunta_tipo
   belongs_to :tema

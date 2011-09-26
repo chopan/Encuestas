@@ -1,4 +1,16 @@
 <%= form_for(@encuesta, :url => ruta, :method => metodo) do |f| %>
+  <% if @encuesta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@encuesta.errors.count, "error") %> impiden guardar esta encuesta:</h2>
+
+      <ul>
+      <% @encuesta.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 
   <p>
     <%= f.label :nombre %><br />

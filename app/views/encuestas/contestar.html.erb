@@ -1,11 +1,23 @@
 <%= form_for(@encuesta, :url => capturar_url, :method => :post) do |f| %>
+  <% if @encuesta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@encuesta.errors.count, "error") %> impiden guardar esta encuesta:</h2>
+
+      <ul>
+      <% @encuesta.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   Encuesta: <%= @encuesta.nombre %>
   <% @encuesta.preguntas.each do |pregunta| %>
   <br/>
     <%= pregunta.texto %>
     <div>
     <% pregunta.opciones.each do |opcion| %>
-      <%=radio_button("encuesta",pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
+      <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
 
       <%= opcion.contenido %>
     <% end %>
