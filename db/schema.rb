@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110923170304) do
+ActiveRecord::Schema.define(:version => 20110927175706) do
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -30,7 +31,14 @@ ActiveRecord::Schema.define(:version => 20110923170304) do
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"
 
   create_table "encuestados", :force => true do |t|
-    t.string   "sesion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "session_id"
+  end
+
+  create_table "opcion_tipos", :force => true do |t|
+    t.string   "tipo"
+    t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20110923170304) do
     t.string   "login",               :limit => 100
     t.string   "apellido_paterno",    :limit => 100
     t.string   "apellido_materno",    :limit => 100
-    t.date     "fecha_alta",                         :default => '2011-09-23'
+    t.date     "fecha_alta",                         :default => '2011-09-27'
     t.string   "email",               :limit => 100
     t.string   "persistence_token",                                            :null => false
     t.string   "crypted_password",                                             :null => false
