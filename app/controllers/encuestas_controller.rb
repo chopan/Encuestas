@@ -66,13 +66,17 @@ def contestar
 end
 
 def capturar_datos
+  @encuestado = encuestado_actual
+  if @encuestado.new_record?
+    @encuestado.save
+  end
  estado = true
  sesion_id = request.session[:session_id]
  params[:encuesta].values.each do |opcion_id|
    respuesta = Respuesta.new
    opcion = Opcion.find(opcion_id)
    @encuesta_id = opcion.pregunta.encuesta.id
-   respuesta.encuestado_id = 1
+   respuesta.encuestado_id = @encuestado.id
    respuesta.pregunta_id = opcion.pregunta.id
    respuesta.opcion_id = opcion.id
    unless respuesta.save

@@ -60,7 +60,7 @@ $(document).ready(function() {
       series: [{
 
             data: [<% pregunta.opciones.each do |opcion| %> <%= opcion.respuestas.count %>,<%end%>],
-            
+            showInLegend: false
       }]
 
     });

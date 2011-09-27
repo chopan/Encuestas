@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20110927182126) do
+=======
+ActiveRecord::Schema.define(:version => 20110927175706) do
+>>>>>>> efac6e5d6aecd938773f8f77726cd9e3c538469e
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -32,7 +36,14 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"
 
   create_table "encuestados", :force => true do |t|
-    t.string   "sesion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "session_id"
+  end
+
+  create_table "opcion_tipos", :force => true do |t|
+    t.string   "tipo"
+    t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,7 +122,11 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
     t.string   "login",               :limit => 100
     t.string   "apellido_paterno",    :limit => 100
     t.string   "apellido_materno",    :limit => 100
+<<<<<<< HEAD
     t.date     "fecha_alta",                         :default => '2011-09-20'
+=======
+    t.date     "fecha_alta",                         :default => '2011-09-27'
+>>>>>>> efac6e5d6aecd938773f8f77726cd9e3c538469e
     t.string   "email",               :limit => 100
     t.string   "persistence_token",                                            :null => false
     t.string   "crypted_password",                                             :null => false
