@@ -17,6 +17,7 @@ end
 def create
   @encuesta = Encuesta.new(params[:encuesta])
   @encuesta.creador = current_usuario
+  @encuesta.concurrencia = 0
   @encuesta.preguntas.each do |pregunta|
       pregunta.encuesta_id = @encuesta.id
   end
@@ -80,7 +81,11 @@ def capturar_datos
    end
  end
  if estado
+   @encuesta = Encuesta.find(@encuesta_id)
    flash[:notice] = "Datos guardados"
+   puts
+   @encuesta.concurrencia = @encuesta.concurrencia + 1
+   @encuesta.save
    redirect_to grafica_resultados_url(@encuesta_id)
  else
    render 'contestar'
