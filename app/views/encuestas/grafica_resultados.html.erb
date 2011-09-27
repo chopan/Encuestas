@@ -1,3 +1,5 @@
+<div id="GRAFICA_ENCUESTA">
+
 <script>
   <% o = 0 %>
 $(document).ready(function() {
@@ -12,14 +14,11 @@ $(document).ready(function() {
         title: {
                 text: '<%= pregunta.texto %>'
         },
-        subtitle: {
-                text: 'Source: <a href="http://www.uach.mx">'+
-                        'UACH</a>'
-        },
+     
 
       xAxis: {
         
-        categories: [<% pregunta.opciones.each do |opcion| %> '<%= opcion.contenido %>',<%end%>],
+        categories: [<% pregunta.opciones.each do |opcion| %> '<h5><%= opcion.contenido %></h5>',<%end%>],
          title: {
             text: null
          }
@@ -58,22 +57,27 @@ $(document).ready(function() {
       credits: {
          enabled: false
       },
-           series: [{
-             name: 'Frecuencia',
-             //data: [<!--%@series.each do |serie|%--> <!--%= serie.resultado.count%-->,<!--%end%-->]
+      series: [{
 
-            data: [<% pregunta.opciones.each do |opcion| %> <%= opcion.respuestas.count %>,<%end%>]
-   }]
+            data: [<% pregunta.opciones.each do |opcion| %> <%= opcion.respuestas.count %>,<%end%>],
+            showInLegend: false
+      }]
+
     });
-<% end %>
+    
+  <% end %>
 
 });
+
 </script>
+
+
 <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
 <% o = 0 %>
+
 <% @encuesta.preguntas.each do  %>
-<% o += 1 %>
-<div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
+    <% o += 1 %>
+    <div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
 <% end %>
 
 
@@ -81,3 +85,5 @@ $(document).ready(function() {
   $("#container").hide();
 
 </script>
+
+</div>

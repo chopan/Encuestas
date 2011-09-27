@@ -23,7 +23,7 @@ Highcharts.theme = {
 	title: {
 		style: { 
 			color: '#FFF',
-			font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+			font: '21px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
 		}
 	},
 	subtitle: {
@@ -39,7 +39,8 @@ Highcharts.theme = {
 		labels: {
 			style: {
 				color: '#999',
-				fontWeight: 'bold'
+				fontWeight: 'bold',
+                                font: 'bold 15px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
 			}
 		},
 		title: {
@@ -58,7 +59,9 @@ Highcharts.theme = {
 		labels: {
 			style: {
 				color: '#999',
-				fontWeight: 'bold'
+				fontWeight: 'bold',
+                                font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+
 			}
 		},
 		title: {
@@ -216,7 +219,11 @@ Highcharts.theme = {
 		outlineColor: '#CCC',
 		maskFill: 'rgba(16, 16, 16, 0.5)',
 		series: {
-			color: '#7798BF',
+                        style: {
+						id: 'cch'
+					},
+                        font: 'bold 1px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif',
+			color: '#025648',
 			lineColor: '#A6C7ED'
 		}
 	},
