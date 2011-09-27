@@ -1,9 +1,8 @@
 class EncuestasController < ApplicationController
+before_filter :authenticate
 
  def index
    @encuestas = Encuesta.all
-   puts 555555
-   puts request.cookies
    
  end
 
@@ -71,6 +70,7 @@ def capturar_datos
  params[:encuesta].values.each do |opcion_id|
    respuesta = Respuesta.new
    opcion = Opcion.find(opcion_id)
+   @encuesta_id = opcion.pregunta.encuesta.id
    respuesta.encuestado_id = 1
    respuesta.pregunta_id = opcion.pregunta.id
    respuesta.opcion_id = opcion.id
@@ -81,7 +81,7 @@ def capturar_datos
  end
  if estado
    flash[:notice] = "Datos guardados"
-   redirect_to encuestas_url
+   redirect_to grafica_resultados_url(@encuesta_id)
  else
    render 'contestar'
  end

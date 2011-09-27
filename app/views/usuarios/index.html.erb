@@ -1,0 +1,16 @@
+<h1>Usuarios</h1>
+<% @usuarios.each do |usuario| %>
+<div>
+  <%= usuario.login %>
+  <%= usuario.apellido_paterno %>
+  <%= usuario.apellido_materno %>
+  <%= usuario.email %>
+  <%= usuario.fecha_alta %>
+  <% if current_usuario_session and current_usuario.is_admin? %>
+    <%= link_to 'Editar', edit_usuario_url(usuario) %>
+    <%= link_to 'Eliminar', usuario, :confirm => "Estas seguro?", :method => :delete %>
+  <% end %>
+</div>
+<% end %>
+
+<%= link_to 'Registrar nuevo usuario', new_usuario_url %>

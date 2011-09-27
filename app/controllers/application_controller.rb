@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_usuario_session, :current_usuario
+  helper_method :current_usuario_session, :current_usuario, :encuesta_propia?
 
  protected
   def current_usuario_session

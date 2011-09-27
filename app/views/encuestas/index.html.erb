@@ -1,10 +1,16 @@
 <% @encuestas.each do |encuesta| %>
-<div>
-  <%= encuesta.nombre %>
-  <%  encuesta.preguntas.each do |pregunta| %>
-    <%= pregunta.texto %>
-  <% end %>
-  <%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%>
-  <%= link_to "Contestar",contestar_url(encuesta) %>
-</div>
+    <% if encuesta_propia?(encuesta) or current_usuario.is_admin? %>
+        <div>
+          <%= encuesta.nombre %>
+          <%  encuesta.preguntas.each do |pregunta| %>
+            <%= pregunta.texto %>
+          <% end %>
+          <% if current_usuario_session and current_usuario.is_admin? %>
+              <%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%>
+          <% end %>
+           <%= link_to "Contestar",contestar_url(encuesta) %>
+        </div>
+    <% end %>
 <% end %>
+
+<%= link_to 'Crear nueva encuesta', new_encuesta_url %>
