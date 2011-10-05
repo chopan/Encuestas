@@ -1,9 +1,11 @@
 Encuestas::Application.routes.draw do
+   get "encuestas/prueba"
   delete "logout" => "usuario_sessions#destroy", :as => :logout
   resource :usuario_session
   resources :usuarios
   resources :encuestas
 
+ 
   get "encuestas/:id/contestar/" => "encuestas#contestar", :as => :contestar
   post "encuestas/capturar_datos" => "encuestas#capturar_datos", :as => :capturar
   get "encuestas/:id/grafica" => "encuestas#grafica_resultados", :as => :grafica_resultados

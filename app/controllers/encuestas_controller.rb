@@ -1,5 +1,5 @@
 class EncuestasController < ApplicationController
-before_filter :authenticate
+layout nil
 
  def index
    @encuestas = Encuesta.all
@@ -63,6 +63,11 @@ end
 
 def contestar
     @encuesta = Encuesta.find(params[:id])
+    respond_to do |format|
+      format.html do
+        render :xml => @encuesta
+      end
+    end
 end
 
 def capturar_datos
@@ -100,5 +105,15 @@ end
   def grafica_resultados
     @encuesta = Encuesta.find(params[:id])
 
+  end
+
+  def prueba
+    @encuesta = Encuesta.find(16)
+    respond_to do |format|
+      format.html do
+        puts "////////////////// }"
+        render 'contestar'
+      end
+    end
   end
 end
