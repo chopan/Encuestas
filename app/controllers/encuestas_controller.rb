@@ -87,15 +87,14 @@ def capturar_datos
  if estado
    @encuesta = Encuesta.find(@encuesta_id)
    flash[:notice] = "Datos guardados"
-   puts
-   @encuesta.concurrencia = @encuesta.concurrencia + 1
-   @encuesta.save
-   redirect_to grafica_resultados_url(@encuesta_id)
- else
-   render 'contestar'
- end
+    @encuesta.concurrencia = @encuesta.obtener_concurrencia
+    @encuesta.save
+    redirect_to grafica_resultados_url(@encuesta_id)
+   else
+    render 'contestar'
+   end
   
-end
+  end
 
   def grafica_resultados
     @encuesta = Encuesta.find(params[:id])
