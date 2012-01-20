@@ -37,3 +37,7 @@ gem "therubyracer", :require => 'v8'
 
 gem 'authlogic'
 gem 'easy_roles'
+
+#Bootstrap Twitter
+gem 'bootstrap-sass', '1.4.0'
+
