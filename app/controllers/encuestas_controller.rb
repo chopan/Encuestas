@@ -1,5 +1,5 @@
 class EncuestasController < ApplicationController
-layout nil
+
 
  def index
    @encuestas = Encuesta.all
@@ -64,9 +64,7 @@ end
 def contestar
     @encuesta = Encuesta.find(params[:id])
     respond_to do |format|
-      format.html do
-        render :xml => @encuesta
-      end
+      format.html 
     end
 end
 
