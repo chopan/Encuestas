@@ -58,7 +58,7 @@
                       <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
             <% end %>
           </ul>
-          <p class="pull-right">Logged in as <a href="#">username</a></p>
+          <p class="pull-right">Usuario: <%= current_usuario.login %></p>
         </div>
       </div>
     </div>
@@ -66,6 +66,7 @@
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
+        <!--
           <h5>Sidebar</h5>
           <ul>
             <li><a href="#">Link</a></li>
@@ -73,13 +74,13 @@
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
           </ul>
+          -->
         </div>
       </div>
       <div class="content">
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="hero-unit">
             <%= yield %>
-          <p><a class="btn primary large">Learn more &raquo;</a></p>
         </div>
 
         <!-- Example row of columns 
