@@ -17,7 +17,16 @@
     <%= pregunta.texto %>
     <div>
     <% pregunta.opciones.each do |opcion| %>
-      <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
+      <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Sencilla") %>
+        <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
+      <% else %>
+        <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Multiple") %>
+          <%= check_box_tag opcion.id %>
+        <% else %>
+          <%= text_field_tag opcion.id %>
+        <% end %>
+      <% end %>
+
 
       <%= opcion.contenido %>
     <% end %>

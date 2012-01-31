@@ -1,11 +1,17 @@
 <div class="fields">
 <p>
-  <%= f.label :texto, "Pregunta" %>
+  <%= f.label :texto, "Tipo de pregunta" %>
+
+  <%= f.collection_select :pregunta_tipo_id, PreguntaTipo.all, :id, :nombre%>
+
   <%= f.text_area :texto, :rows => 3 %>
   <%= link_to_remove_fields "Eliminar", f %>
 </p>
+
 <%= f.fields_for :opciones do |builder| %>
   <%= render 'opciones', :f => builder %>
 <% end %>
+
+
 <p><%= link_to_add_fields "Agregar opcion", f, :opciones %></p>
 </div>

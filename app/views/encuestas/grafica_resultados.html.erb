@@ -4,6 +4,7 @@
   <% o = 0 %>
 $(document).ready(function() {
   <% @encuesta.preguntas.each do |pregunta| %>
+      <%unless pregunta.pregunta_tipo.nombre == "Abierta"%>
       var chart;
       <% o += 1 %>
     chart = new Highcharts.Chart({
@@ -64,7 +65,7 @@ $(document).ready(function() {
       }]
 
     });
-    
+    <% end %>
   <% end %>
 
 });
@@ -76,10 +77,13 @@ $(document).ready(function() {
 <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
 <% o = 0 %>
 
-<% @encuesta.preguntas.each do  %>
+<% @encuesta.preguntas.each do |pregunta| %>
+  <%  puts pregunta.pregunta_tipo.nombre %>
+<%unless pregunta.pregunta_tipo.nombre == "Abierta"%>
     <% o += 1 %>
     <div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
 <% end %>
+  <% end %>
 
 
 <script>

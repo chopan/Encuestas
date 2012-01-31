@@ -16,10 +16,12 @@
     <%= f.label :nombre %><br />
     <%= f.text_field :nombre %>
   </p>
-  <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
+  
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>
   <% end %>
+
+  <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
 
   <p><%= f.submit "Submit" %></p>
 <% end %>

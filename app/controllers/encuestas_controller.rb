@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class EncuestasController < ApplicationController
 
 
@@ -8,9 +9,9 @@ class EncuestasController < ApplicationController
 
 def new
   @encuesta = Encuesta.new
-  3.times do
+  1.times do
     pregunta = @encuesta.preguntas.build
-    3.times { pregunta.opciones.build }
+    1.times { pregunta.opciones.build }
   end
 end
 
@@ -20,6 +21,7 @@ def create
   @encuesta.concurrencia = 0
   @encuesta.preguntas.each do |pregunta|
       pregunta.encuesta_id = @encuesta.id
+
   end
   if @encuesta.save
     flash[:notice] = "Encuesta guardada correctamente"
@@ -75,6 +77,33 @@ def capturar_datos
   end
  estado = true
  sesion_id = request.session[:session_id]
+ params.each do |param|
+  if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
+    respuesta = Respuesta.new
+    opcion = Opcion.find(param[0])
+    @encuesta_id = opcion.pregunta.encuesta.id
+   respuesta.encuestado_id = @encuestado.id
+   respuesta.pregunta_id = opcion.pregunta.id
+   respuesta.opcion_id = opcion.id
+   unless respuesta.save
+      estado = false
+      break
+   end
+  else
+    if param[0] == "opcion"
+      respuesta = Respuesta.new
+      opcion = Opcion.find(param[1])
+      @encuesta_id = opcion.pregunta.encuesta.id
+     respuesta.encuestado_id = @encuestado.id
+     respuesta.pregunta_id = opcion.pregunta.id
+     respuesta.opcion_id = opcion.id
+     unless respuesta.save
+        estado = false
+        break
+     end
+    end
+  end
+ end
  params[:encuesta].values.each do |opcion_id|
    respuesta = Respuesta.new
    opcion = Opcion.find(opcion_id)

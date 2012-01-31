@@ -6,5 +6,5 @@ class Pregunta < ActiveRecord::Base
   belongs_to :tema
 
   has_many :opciones, :dependent => :destroy
-  accepts_nested_attributes_for :opciones, :reject_if => lambda { |a| a[:contenido].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :opciones,  :allow_destroy => true
 end
