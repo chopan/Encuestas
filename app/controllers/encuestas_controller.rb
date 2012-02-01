@@ -75,45 +75,32 @@ def capturar_datos
   if @encuestado.new_record?
     @encuestado.save
   end
+
+
+
  estado = true
  sesion_id = request.session[:session_id]
  params.each do |param|
-  if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
-    respuesta = Respuesta.new
-    opcion = Opcion.find(param[0])
-    @encuesta_id = opcion.pregunta.encuesta.id
-   respuesta.encuestado_id = @encuestado.id
-   respuesta.pregunta_id = opcion.pregunta.id
-   respuesta.opcion_id = opcion.id
-   unless respuesta.save
-      estado = false
-      break
-   end
-  else
-    if param[0] == "opcion"
-      respuesta = Respuesta.new
-      opcion = Opcion.find(param[1])
-      @encuesta_id = opcion.pregunta.encuesta.id
-     respuesta.encuestado_id = @encuestado.id
-     respuesta.pregunta_id = opcion.pregunta.id
-     respuesta.opcion_id = opcion.id
-     unless respuesta.save
-        estado = false
-        break
-     end
+    if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
+      opcion = Opcion.find(param[0])
+      estado = crear_respuesta opcion, param
+    else
+      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+          opcion = Opcion.find(param[0])
+         
+          if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
+
+            estado = crear_respuesta opcion, param
+          
+          end
+      end
+      
     end
-  end
  end
- params[:encuesta].values.each do |opcion_id|
-   respuesta = Respuesta.new
-   opcion = Opcion.find(opcion_id)
-   @encuesta_id = opcion.pregunta.encuesta.id
-   respuesta.encuestado_id = @encuestado.id
-   respuesta.pregunta_id = opcion.pregunta.id
-   respuesta.opcion_id = opcion.id
-   unless respuesta.save
-      estado = false
-      break
+ if params[:encuesta] != nil
+   params[:encuesta].values.each do |opcion_id|
+     opcion = Opcion.find(opcion_id)
+     estado = crear_respuesta opcion
    end
  end
  if estado
@@ -141,5 +128,22 @@ def capturar_datos
         render 'contestar'
       end
     end
+  end
+
+ private
+  def crear_respuesta(*args)
+    estado = true
+    respuesta = Respuesta.new
+     @encuesta_id = args[0].pregunta.encuesta.id
+     respuesta.encuestado_id = @encuestado.id
+     respuesta.pregunta_id = args[0].pregunta.id
+     respuesta.opcion_id = args[0].id
+    if args.size > 1
+      respuesta.texto = args[1][1]
+    end
+    unless respuesta.save
+      estado = false
+    end
+     estado
   end
 end

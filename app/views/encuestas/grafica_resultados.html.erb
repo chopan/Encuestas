@@ -78,12 +78,12 @@ $(document).ready(function() {
 <% o = 0 %>
 
 <% @encuesta.preguntas.each do |pregunta| %>
-  <%  puts pregunta.pregunta_tipo.nombre %>
-<%unless pregunta.pregunta_tipo.nombre == "Abierta"%>
-    <% o += 1 %>
-    <div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
-<% end %>
-  <% end %>
+  
+    <%unless pregunta.pregunta_tipo.nombre == "Abierta"%>
+        <% o += 1 %>
+        <div id="container<%= o %>" style="width: 350px; height: 200px; margin: 0 auto"></div>
+    <% end %>
+ <% end %>
 
 
 <script>

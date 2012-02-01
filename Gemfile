@@ -41,3 +41,6 @@ gem 'easy_roles'
 #Bootstrap Twitter
 gem 'bootstrap-sass', '1.4.0'
 
+#Paginacion
+gem 'will_paginate', "3.0.2"
+

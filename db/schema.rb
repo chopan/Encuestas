@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110927182126) do
+ActiveRecord::Schema.define(:version => 20120201190223) do
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"
 
   create_table "encuestados", :force => true do |t|
+    t.string   "session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "session_id"
   end
 
   create_table "opcion_tipos", :force => true do |t|
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
   create_table "pregunta_tipos", :force => true do |t|
     t.string   "nombre",      :limit => 50
     t.string   "descripcion", :limit => 300
-    t.string   "tipo",        :limit => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
     t.integer  "opcion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "texto"
   end
 
   create_table "sessions", :force => true do |t|
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20110927182126) do
     t.string   "login",               :limit => 100
     t.string   "apellido_paterno",    :limit => 100
     t.string   "apellido_materno",    :limit => 100
-    t.date     "fecha_alta",                         :default => '2012-01-20'
+    t.date     "fecha_alta",                         :default => '2011-09-20'
     t.string   "email",               :limit => 100
     t.string   "persistence_token",                                            :null => false
     t.string   "crypted_password",                                             :null => false
