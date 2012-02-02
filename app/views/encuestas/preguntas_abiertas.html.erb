@@ -1,0 +1,9 @@
+<% @preguntas.each do |pregunta| %>
+  <%= pregunta.texto %><br/><br/><br/>
+  <% pregunta.opciones.each do |opcion| %><br/><br/>
+    <%= opcion.contenido %><br/>
+    <% opcion.respuestas.each do |respuesta| %>
+      <%= respuesta.texto %><br/>
+    <% end %>
+  <% end %>
+<% end %>

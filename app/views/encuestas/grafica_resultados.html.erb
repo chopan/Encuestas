@@ -76,7 +76,7 @@ $(document).ready(function() {
 
 <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
 <% o = 0 %>
-
+<%= link_to "Mostrar los resultados para las preguntas abiertas", preguntas_abiertas_url(@encuesta) %>
 <% @encuesta.preguntas.each do |pregunta| %>
   
     <%unless pregunta.pregunta_tipo.nombre == "Abierta"%>

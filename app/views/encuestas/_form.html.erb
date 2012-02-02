@@ -1,7 +1,8 @@
 <%= form_for(@encuesta, :url => ruta, :method => metodo) do |f| %>
   <% if @encuesta.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@encuesta.errors.count, "error") %> impiden guardar esta encuesta:</h2>
+      <% no_err = @encuesta.errors.count %>
+      <h2><%=  pluralize(no_err, "error") %> <%if no_err > 1 %> impiden<%else%> impide <%end %>   guardar esta encuesta:</h2>
 
       <ul>
       <% @encuesta.errors.full_messages.each do |msg| %>

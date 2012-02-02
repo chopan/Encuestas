@@ -3,4 +3,5 @@ class Respuesta < ActiveRecord::Base
   has_many :opciones
   belongs_to :pregunta
 
+  validates :texto, :presence => true
 end

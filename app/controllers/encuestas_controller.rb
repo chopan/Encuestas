@@ -9,7 +9,7 @@ class EncuestasController < ApplicationController
 
 def new
   @encuesta = Encuesta.new
-  1.times do
+  3.times do
     pregunta = @encuesta.preguntas.build
     1.times { pregunta.opciones.build }
   end
@@ -21,7 +21,7 @@ def create
   @encuesta.concurrencia = 0
   @encuesta.preguntas.each do |pregunta|
       pregunta.encuesta_id = @encuesta.id
-
+      pregunta.save
   end
   if @encuesta.save
     flash[:notice] = "Encuesta guardada correctamente"
@@ -72,26 +72,24 @@ end
 
 def capturar_datos
   @encuestado = encuestado_actual
+
   if @encuestado.new_record?
     @encuestado.save
   end
-
-
-
- estado = true
+  estado = true
  sesion_id = request.session[:session_id]
  params.each do |param|
     if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
       opcion = Opcion.find(param[0])
-      estado = crear_respuesta opcion, param
+      estado = crear_respuesta opcion, param 
     else
       if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
           opcion = Opcion.find(param[0])
          
           if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
 
-            estado = crear_respuesta opcion, param
-          
+            estado = crear_respuesta opcion, param 
+
           end
       end
       
@@ -100,7 +98,7 @@ def capturar_datos
  if params[:encuesta] != nil
    params[:encuesta].values.each do |opcion_id|
      opcion = Opcion.find(opcion_id)
-     estado = crear_respuesta opcion
+     estado = crear_respuesta opcion 
    end
  end
  if estado
@@ -110,7 +108,7 @@ def capturar_datos
     @encuesta.save
     redirect_to grafica_resultados_url(@encuesta_id)
    else
-    render 'contestar'
+     redirect_to contestar_encuesta_url @encuesta_id
    end
   
   end
@@ -128,6 +126,10 @@ def capturar_datos
         render 'contestar'
       end
     end
+  end
+
+  def preguntas_abiertas
+    @preguntas = Encuesta.find(params[:id]).preguntas.where("pregunta_tipo_id = ?", 3)
   end
 
  private

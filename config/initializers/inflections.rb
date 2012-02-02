@@ -12,6 +12,7 @@
 
   inflect.irregular "rol", "roles"
   inflect.irregular "opcion", "opciones"
+  inflect.irregular "error", "errores"
 
 end
 # end

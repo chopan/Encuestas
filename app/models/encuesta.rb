@@ -6,7 +6,7 @@ class Encuesta < ActiveRecord::Base
   has_many :temas
   has_many :preguntas, :dependent => :destroy
 
-  accepts_nested_attributes_for :preguntas, :reject_if => lambda { |a| a[:texto].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :preguntas,  :allow_destroy => true
 
   def obtener_concurrencia
     unless self.concurrencia.nil?

@@ -5,8 +5,8 @@ Encuestas::Application.routes.draw do
   resources :usuarios
   resources :encuestas
 
- 
-  get "encuestas/:id/contestar/" => "encuestas#contestar", :as => :contestar
+  get "encuestas/:id/preguntas_abiertas" => "encuestas#preguntas_abiertas", :as => :preguntas_abiertas
+  get "encuestas/:id/contestar/" => "encuestas#contestar", :as => :contestar_encuesta
   post "encuestas/capturar_datos" => "encuestas#capturar_datos", :as => :capturar
   get "encuestas/:id/grafica" => "encuestas#grafica_resultados", :as => :grafica_resultados
   # The priority is based upon order of creation:
