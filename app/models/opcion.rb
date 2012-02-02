@@ -1,5 +1,5 @@
 class Opcion < ActiveRecord::Base
-  validates :contenido ,:presence=>true
+  validates :contenido ,:length => {:minimum => 2 }
 
   belongs_to :pregunta
   belongs_to :opcion_tipo

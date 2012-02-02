@@ -101,14 +101,16 @@ def capturar_datos
      estado = crear_respuesta opcion 
    end
  end
- if estado
+ if estado==true
    @encuesta = Encuesta.find(@encuesta_id)
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
     @encuesta.save
-    redirect_to grafica_resultados_url(@encuesta_id)
+    redirect_to grafica_resultados_url @encuesta_id
    else
      redirect_to contestar_encuesta_url @encuesta_id
+     flash[:notice]= "Llene todos los campos porfavor"
+
    end
   
   end
