@@ -9,10 +9,11 @@ class EncuestasController < ApplicationController
 
 def new
   @encuesta = Encuesta.new
-  3.times do
-    pregunta = @encuesta.preguntas.build
-    1.times { pregunta.opciones.build }
-  end
+  #Pone por default el numero de preguntas que aparece al crear una nueva encuesta
+    3.times do
+      pregunta = @encuesta.preguntas.build
+      pregunta.opciones.build
+    end
 end
 
 def create
@@ -78,39 +79,43 @@ def capturar_datos
   end
   estado = true
  sesion_id = request.session[:session_id]
- params.each do |param|
-    if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
-      opcion = Opcion.find(param[0])
-      estado = crear_respuesta opcion, param 
-    else
-      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
-          opcion = Opcion.find(param[0])
-         
-          if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
-
-            estado = crear_respuesta opcion, param 
-
-          end
-      end
-      
-    end
- end
- if params[:encuesta] != nil
+ #Para las preguntas de una sola opcion
+ contador_simples = 0
+ contador_multiples = 0
+ if params[:encuesta] != nil and estado
    params[:encuesta].values.each do |opcion_id|
      opcion = Opcion.find(opcion_id)
-     estado = crear_respuesta opcion 
+     estado = crear_respuesta opcion
+     contador_simples += 1
    end
  end
- if estado==true
+ params.each do |param|
+   #Para las preguntas de opcion multiple
+    if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
+      opcion = Opcion.find(param[0])
+      estado = crear_respuesta opcion, param
+      contador_multiples += 1
+    else
+      #Para las preguntas abiertas
+      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+          opcion = Opcion.find(param[0])
+          if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
+            estado = crear_respuesta opcion, param 
+          end
+      end
+    end
+ end
+ 
+ if estado and contador_simples > 0 and contador_multiples > 0
    @encuesta = Encuesta.find(@encuesta_id)
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
     @encuesta.save
     redirect_to grafica_resultados_url @encuesta_id
    else
-     redirect_to contestar_encuesta_url @encuesta_id
+     
      flash[:notice]= "Llene todos los campos porfavor"
-
+     redirect_to contestar_encuesta_url @encuesta_id
    end
   
   end

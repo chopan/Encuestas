@@ -8,7 +8,7 @@
           <% if current_usuario_session and current_usuario.is_admin? %>
               <%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%>
           <% end %>
-           <%= link_to "Contestar",contestar_url(encuesta) %>
+           <%= link_to "Contestar",contestar_encuesta_url(encuesta) %>
         </div>
     <% end %>
 <% end %>
