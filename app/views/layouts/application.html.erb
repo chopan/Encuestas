@@ -53,6 +53,7 @@
           
             <li class="active"><a href="/">Home</a></li>
             <% if current_usuario_session %>
+                      <li><%= link_to "Encuestas", encuestas_url %></li>
                       <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
                 <% else %>
                       <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>

@@ -1,0 +1,6 @@
+<h1>Respuestas</h1>
+<% @respuestas.each do |respuesta| %>
+  <%= respuesta.texto %><br/>
+<% end %>
+
+  <%= will_paginate @respuestas %>

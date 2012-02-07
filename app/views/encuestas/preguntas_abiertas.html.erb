@@ -1,9 +1,8 @@
 <% @preguntas.each do |pregunta| %>
-  <%= pregunta.texto %><br/><br/><br/>
+  <br/><br/><br/><%= pregunta.texto %>
   <% pregunta.opciones.each do |opcion| %><br/><br/>
-    <%= opcion.contenido %><br/>
-    <% opcion.respuestas.each do |respuesta| %>
-      <%= respuesta.texto %><br/>
-    <% end %>
+    <%= link_to opcion.contenido, opcion_respuestas_url(pregunta.encuesta.id,pregunta.id,opcion.id)  %><br/>
   <% end %>
 <% end %>
+
+<%= link_to "Regresar", grafica_resultados_url(@encuesta_id)%>

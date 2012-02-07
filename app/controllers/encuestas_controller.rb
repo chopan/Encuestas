@@ -1,10 +1,10 @@
 # encoding: UTF-8
+require 'will_paginate/array'
 class EncuestasController < ApplicationController
-
+  before_filter :authenticate
 
  def index
-   @encuestas = Encuesta.all
-   
+   @encuestas = Encuesta.find_all_by_creador_id current_usuario.id
  end
 
 def new
@@ -114,7 +114,7 @@ def capturar_datos
     redirect_to grafica_resultados_url @encuesta_id
    else
      
-     flash[:notice]= "Llene todos los campos porfavor"
+     flash[:error]= "Llene todos los campos porfavor"
      redirect_to contestar_encuesta_url @encuesta_id
    end
   
@@ -122,7 +122,7 @@ def capturar_datos
 
   def grafica_resultados
     @encuesta = Encuesta.find(params[:id])
-
+    @preguntas = @encuesta.preguntas.where("pregunta_tipo_id != ?", 3).paginate(:page => params[:page], :per_page => 1)
   end
 
   def prueba
@@ -136,7 +136,12 @@ def capturar_datos
   end
 
   def preguntas_abiertas
+    @encuesta_id = params[:id]
     @preguntas = Encuesta.find(params[:id]).preguntas.where("pregunta_tipo_id = ?", 3)
+  end
+
+  def opcion_respuestas
+    @respuestas = Respuesta.find_all_by_opcion_id(params[:opcion_id]).paginate(:page => params[:page], :per_page => 20)
   end
 
  private
