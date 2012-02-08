@@ -54,6 +54,9 @@
             <li class="active"><a href="/">Home</a></li>
             <% if current_usuario_session %>
                       <li><%= link_to "Encuestas", encuestas_url %></li>
+                      <% if current_usuario.is_admin? %>
+                        <li><%= link_to  "Usuarios", usuarios_url%></li>
+                      <% end %>
                       <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
                 <% else %>
                       <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
@@ -67,6 +70,12 @@
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
+        <% if current_usuario_session %>
+          <%= current_usuario.login %>
+          <%= current_usuario.email %>
+        <% else %>
+          <%= image_tag "sidebar.jpg", :size => "180x205" %>
+        <% end %>
         <!--
           <h5>Sidebar</h5>
           <ul>

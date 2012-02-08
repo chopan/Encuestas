@@ -1,1 +1,5 @@
-BIENVENIDO
+
+<h2>Ultimas encuestas publicadas</h2>
+<% @encuestas.each do |encuesta| %>
+  <%= encuesta.nombre %><br/>
+<% end %>

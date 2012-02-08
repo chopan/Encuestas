@@ -1,3 +1,4 @@
+<h3>Mis encuestas</h3>
 <% @encuestas.each do |encuesta| %>
     <% if encuesta_propia?(encuesta) or current_usuario.is_admin? %>
         <div>
@@ -14,3 +15,5 @@
 <% end %>
 
 <%= link_to 'Crear nueva encuesta', new_encuesta_url %>
+
+  <%= will_paginate @encuestas %>

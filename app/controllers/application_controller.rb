@@ -23,12 +23,8 @@ class ApplicationController < ActionController::Base
   def administrador?
     unless current_usuario_session and current_usuario.is_admin?
       flash[:notice] = "Necesita ser administrador"
-      redirect_to root_path
+      redirect_to encuestas_url
     end
-  end
-
-  def encuesta_propia?(encuesta)
-    encuesta.creador == current_usuario or current_usuario.is_admin?
   end
 
   #Los encuestados aun siendo anonimos son guardados para poder identificar si el usuario

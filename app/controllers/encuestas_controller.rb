@@ -1,10 +1,11 @@
 # encoding: UTF-8
 require 'will_paginate/array'
 class EncuestasController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos]
+  before_filter :encuesta_propia?, :only => [:show, :edit]
 
  def index
-   @encuestas = Encuesta.find_all_by_creador_id current_usuario.id
+   @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
  end
 
 def new
@@ -111,7 +112,7 @@ def capturar_datos
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
     @encuesta.save
-    redirect_to grafica_resultados_url @encuesta_id
+    redirect_to encuesta_gracias_url
    else
      
      flash[:error]= "Llene todos los campos porfavor"
@@ -144,6 +145,10 @@ def capturar_datos
     @respuestas = Respuesta.find_all_by_opcion_id(params[:opcion_id]).paginate(:page => params[:page], :per_page => 20)
   end
 
+  def gracias
+    
+  end
+
  private
   def crear_respuesta(*args)
     estado = true
@@ -159,5 +164,18 @@ def capturar_datos
       estado = false
     end
      estado
+  end
+
+  def encuesta_propia?(*args)
+    if args.size > 0
+      encuesta = Encuesta.find(args[0])
+    else
+      encuesta = Encuesta.find(params[:id])
+    end
+    
+    unless encuesta.creador == current_usuario or current_usuario.is_admin?
+      flash[:error] = "No tiene los permisos para acceder a esta encuesta"
+      redirect_to encuestas_url
+    end
   end
 end

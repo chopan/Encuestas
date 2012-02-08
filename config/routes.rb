@@ -5,6 +5,7 @@ Encuestas::Application.routes.draw do
   resources :usuarios
   resources :encuestas
 
+  get "agradecimiento" => "encuestas#gracias", :as => :encuesta_gracias
   get "encuestas/:id/preguntas_abiertas/:pregunta_id/opcion/:opcion_id/respuestas" => "encuestas#opcion_respuestas", :as => :opcion_respuestas
   get "encuestas/:id/preguntas_abiertas" => "encuestas#preguntas_abiertas", :as => :preguntas_abiertas
   get "encuestas/:id/contestar/" => "encuestas#contestar", :as => :contestar_encuesta
