@@ -7,7 +7,7 @@
   <%= f.label :texto, "Tipo de pregunta" %>
 
   <%= f.collection_select :pregunta_tipo_id, PreguntaTipo.all, :id, :nombre%>
-  <%= link_to_remove_fields "Eliminar", f %>
+  <%= link_to_remove_fields "Eliminar pregunta", f %>
 </p>
 
 <%= f.fields_for :opciones do |builder| %>

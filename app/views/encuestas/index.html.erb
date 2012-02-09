@@ -1,19 +1,27 @@
 <h3>Mis encuestas</h3>
+
+<table class="table zebra-striped">
+  <tbody>
 <% @encuestas.each do |encuesta| %>
-    <% if encuesta_propia?(encuesta) or current_usuario.is_admin? %>
-        <div>
-          <%= encuesta.nombre %>
-          <%  encuesta.preguntas.each do |pregunta| %>
-            <%= pregunta.texto %>
-          <% end %>
-          <% if current_usuario_session and current_usuario.is_admin? %>
-              <%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%>
-          <% end %>
-           <%= link_to "Contestar",contestar_encuesta_url(encuesta) %>
-        </div>
-    <% end %>
+
+    
+    <tr>
+      <td> <%= encuesta.nombre %></td> 
+  
+    
+        
+
+      <td><%= link_to "Editar",edit_encuesta_url(encuesta) %></td>
+      <td><%= link_to "Eliminar", encuesta_path(encuesta), :method => :delete, :confirm => "Esta seguro que desea eliminar?"%></td>
+
+      <td><%= link_to "Contestar",contestar_encuesta_url(encuesta) %></td>
+    </tr>
+
 <% end %>
+   </tbody>
+</table>
 
 <%= link_to 'Crear nueva encuesta', new_encuesta_url %>
-
-  <%= will_paginate @encuestas %>
+<div class="digg_pagination">
+<%= will_paginate @encuestas ,:class => "pagination"%>
+  </div>

@@ -1,8 +1,12 @@
+<ul class="unstyled">
 <% @preguntas.each do |pregunta| %>
-  <br/><br/><br/><%= pregunta.texto %>
-  <% pregunta.opciones.each do |opcion| %><br/><br/>
-    <%= link_to opcion.contenido, opcion_respuestas_url(pregunta.encuesta.id,pregunta.id,opcion.id)  %><br/>
+  <li><%= pregunta.texto %></li>
+  <br/>
+  <dl style="margin-bottom: 13px;">
+  <% pregunta.opciones.each do |opcion| %>
+    <li><%= link_to opcion.contenido, opcion_respuestas_url(pregunta.encuesta.id,pregunta.id,opcion.id)  %></li>
   <% end %>
+    </dl>
 <% end %>
-
+</ul>
 <%= link_to "Regresar", grafica_resultados_url(@encuesta_id)%>

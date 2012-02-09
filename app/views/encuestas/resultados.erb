@@ -1,0 +1,18 @@
+<table class="table zebra-striped">
+  <tbody>
+<% @encuestas.each do |encuesta| %>
+
+      
+    <tr>
+      <td style="width: 600px;"> <%= encuesta.nombre %></td>
+      <td> <%= encuesta.concurrencia %></td>
+      <td> <%= link_to "Ver resultados", grafica_resultados_url(encuesta)%></td>
+    </tr>
+  
+<% end %>
+   </tbody>
+</table>
+
+<%= link_to 'Crear nueva encuesta', new_encuesta_url %>
+
+  <%= will_paginate @encuestas %>

@@ -13,9 +13,9 @@
 
   Encuesta: <%= @encuesta.nombre %>
   <% @encuesta.preguntas.each do |pregunta| %>
-  <br/>
-    <%= pregunta.texto %>
-    <div>
+  <br/><br/>
+  <abbr><%= pregunta.texto %></abbr>
+  <div style="margin: 11px; margin-left: 20px;">
     <% pregunta.opciones.each do |opcion| %>
       <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Sencilla") %>
         <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>

@@ -5,7 +5,11 @@ class EncuestasController < ApplicationController
   before_filter :encuesta_propia?, :only => [:show, :edit]
 
  def index
-   @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
+   if current_usuario.is_admin?
+     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 15)
+   else
+     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
+   end
  end
 
 def new
@@ -149,6 +153,14 @@ def capturar_datos
     
   end
 
+  def resultados
+    if current_usuario.is_admin?
+     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 15)
+   else
+     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
+   end
+  end
+
  private
   def crear_respuesta(*args)
     estado = true
@@ -172,6 +184,8 @@ def capturar_datos
     else
       encuesta = Encuesta.find(params[:id])
     end
+
+  
     
     unless encuesta.creador == current_usuario or current_usuario.is_admin?
       flash[:error] = "No tiene los permisos para acceder a esta encuesta"

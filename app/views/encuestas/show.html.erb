@@ -1,13 +1,17 @@
+<blockquote>
+  <b>Encuesta:</b> <address><%=  @encuesta.nombre %></address>
 
-Encuesta: <%=  @encuesta.nombre %>
-<% x = 1 %>
 <%  @encuesta.preguntas.each do |pregunta| %>
-  <br/>
-  <%=  "#{x}) #{pregunta.texto}" %>
-  <% x += 1 %>
-  <% y = 1 %>
+  <dl>
+  <%=  " #{pregunta.texto}" %>
+
+    <ol>
   <% pregunta.opciones.each do |opcion| %>
-    <%=  "#{y}) #{opcion.contenido}" %>
-    <% y += 1 %>
+
+      <li style="margin-top: 5px;"><%=  " #{opcion.contenido}" %></li>
+   
   <% end %>
+      </ol>
+    </dl>
 <% end %>
+  </blockquote>

@@ -3,8 +3,10 @@ Encuestas::Application.routes.draw do
   delete "logout" => "usuario_sessions#destroy", :as => :logout
   resource :usuario_session
   resources :usuarios
+  get "encuestas/resultados" => "encuestas#resultados", :as => :resultados
   resources :encuestas
 
+  
   get "agradecimiento" => "encuestas#gracias", :as => :encuesta_gracias
   get "encuestas/:id/preguntas_abiertas/:pregunta_id/opcion/:opcion_id/respuestas" => "encuestas#opcion_respuestas", :as => :opcion_respuestas
   get "encuestas/:id/preguntas_abiertas" => "encuestas#preguntas_abiertas", :as => :preguntas_abiertas

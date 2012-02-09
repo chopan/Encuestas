@@ -1,16 +1,26 @@
 <h1>Usuarios</h1>
+<table class="table zebra-striped">
+  <thead>
+  <th>Login</th>
+  <th>Apellido paterno</th>
+  <th>Apellido materno</th>
+  <th>Email</th>
+  <th>Fecha creacion</th>
+  </thead>
+  <tbody>
 <% @usuarios.each do |usuario| %>
-<div>
-  <%= usuario.login %>
-  <%= usuario.apellido_paterno %>
-  <%= usuario.apellido_materno %>
-  <%= usuario.email %>
-  <%= usuario.fecha_alta %>
+    <tr>
+      <td><%= usuario.login %></td> 
+  <td><%= usuario.apellido_paterno %></td>
+  <td><%= usuario.apellido_materno %></td>
+  <td><%= usuario.email %></td>
+ <td> <%= usuario.fecha_alta %></td>
   <% if current_usuario_session and current_usuario.is_admin? %>
-    <%= link_to 'Editar', edit_usuario_url(usuario) %>
-    <%= link_to 'Eliminar', usuario, :confirm => "Estas seguro?", :method => :delete %>
+  <td>  <%= link_to 'Editar', edit_usuario_url(usuario) %></td>
+  <td><%= link_to 'Eliminar', usuario, :confirm => "Estas seguro?", :method => :delete %></td>
   <% end %>
-</div>
+</tr>
 <% end %>
-
+    </tbody>
+</table>
 <%= link_to 'Registrar nuevo usuario', new_usuario_url %>

@@ -1,6 +1,7 @@
 <h1>Respuestas</h1>
+<ol style="margin-top: 20px;">
 <% @respuestas.each do |respuesta| %>
-  <%= respuesta.texto %><br/>
+  <li><%= respuesta.texto %><br/></li>
 <% end %>
-
+</ol>
   <%= will_paginate @respuestas %>

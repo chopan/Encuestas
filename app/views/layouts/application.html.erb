@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Encuestas</title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", "bootstrap" %>
     <%= javascript_include_tag   "application" %>
     <%= csrf_meta_tags %>
 
@@ -28,7 +28,7 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../bootstrap.css" rel="stylesheet">
+    
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -57,8 +57,10 @@
                       <% if current_usuario.is_admin? %>
                         <li><%= link_to  "Usuarios", usuarios_url%></li>
                       <% end %>
+                        <li><%= link_to  "Resultados", resultados_url%></li>
                       <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
-                <% else %>
+                      
+            <% else %>
                       <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
             <% end %>
           </ul>

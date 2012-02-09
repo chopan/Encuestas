@@ -13,10 +13,12 @@
   <% end %>
 
 
+<blockquote style="margin-bottom: 30px;">
   <p>
     <%= f.label :nombre %><br />
     <%= f.text_field :nombre %>
   </p>
+</blockquote>
   
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>

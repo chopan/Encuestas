@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_usuario_session
-     
+      flash[:error] = "Necesitas iniciar sesion"
       redirect_to new_usuario_session_path
       return false
     end

@@ -1,7 +1,12 @@
-<div>
-  <%= @usuario.login %>
-  <%= @usuario.apellido_paterno %>
-  <%= @usuario.apellido_materno %>
-  <%= @usuario.email %>
-  <%= @usuario.fecha_alta %>
-</div>
+<dl>
+  <dd>Login</dd>
+  <li><%= @usuario.login %></li>
+  <dd>Apellido paterno</dd>
+  <li><%= @usuario.apellido_paterno %></li>
+  <dd>Apellido materno</dd>
+  <li><%= @usuario.apellido_materno %></li>
+  <dd>Email</dd>
+  <li><%= @usuario.email %></li>
+  <dd>Fecha alta</dd>
+  <li><%= @usuario.fecha_alta %></li>
+</dl>
