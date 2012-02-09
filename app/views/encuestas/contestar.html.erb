@@ -27,10 +27,11 @@
         <% end %>
       <% end %>
 
-
+      
       <%= opcion.contenido %>
     <% end %>
   </div>
   <% end %>
+  <%= hidden_field_tag :encuesta_id, @encuesta.id%>
   <%= f.submit "Guardar"  %>
 <% end %>

@@ -78,7 +78,7 @@ end
 
 def capturar_datos
   @encuestado = encuestado_actual
-
+  @encuesta = Encuesta.find params[:encuesta_id]
   if @encuestado.new_record?
     @encuestado.save
   end
@@ -86,6 +86,44 @@ def capturar_datos
  sesion_id = request.session[:session_id]
  #Para las preguntas de una sola opcion
  contador_simples = 0
+ contador_multiples = 0
+ contador_abiertas = 0
+ if params[:encuesta] != nil and estado
+   params[:encuesta].values.each do |opcion_id|
+     opcion = Opcion.find(opcion_id)
+    # estado = crear_respuesta opcion
+     contador_simples += 1
+   end
+ end
+ params.each do |param|
+   #Para las preguntas de opcion multiple
+    if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
+      opcion = Opcion.find(param[0])
+
+     # estado = crear_respuesta opcion, param
+      contador_multiples += 1
+    else
+      #Para las preguntas abiertas
+      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+          opcion = Opcion.find(param[0])
+
+          if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
+            contador_abiertas += 1
+           # estado = crear_respuesta opcion, param
+          end
+      end
+    end
+ end
+
+
+ no_simples = @encuesta.preguntas.where("pregunta_tipo_id = 1")
+ no_multiples = @encuesta.preguntas.where("pregunta_tipo_id = 2")
+ no_abiertas = @encuesta.preguntas.where("pregunta_tipo_id = 3")
+
+  if contador_simples == no_simples and no_multiples == contador_multiples and contador_abiertas == no_abiertas
+
+
+  contador_simples = 0
  contador_multiples = 0
  if params[:encuesta] != nil and estado
    params[:encuesta].values.each do |opcion_id|
@@ -105,14 +143,28 @@ def capturar_datos
       if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
           opcion = Opcion.find(param[0])
           if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
-            estado = crear_respuesta opcion, param 
+            estado = crear_respuesta opcion, param
           end
       end
     end
  end
- 
- if estado and contador_simples > 0 and contador_multiples > 0
-   @encuesta = Encuesta.find(@encuesta_id)
+
+
+
+  end
+
+
+
+
+
+
+
+
+
+
+
+ if contador_simples == no_simples and no_multiples == contador_multiples and contador_abiertas == no_abiertas
+   
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
     @encuesta.save
@@ -120,7 +172,7 @@ def capturar_datos
    else
      
      flash[:error]= "Llene todos los campos porfavor"
-     redirect_to contestar_encuesta_url @encuesta_id
+     redirect_to contestar_encuesta_url @encuesta.id
    end
   
   end

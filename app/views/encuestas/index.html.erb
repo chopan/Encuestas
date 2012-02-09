@@ -1,5 +1,5 @@
 <h3>Mis encuestas</h3>
-
+<br/>
 <table class="table zebra-striped">
   <tbody>
 <% @encuestas.each do |encuesta| %>
@@ -21,7 +21,9 @@
    </tbody>
 </table>
 
-<%= link_to 'Crear nueva encuesta', new_encuesta_url %>
-<div class="digg_pagination">
+
+<div class="digg_pagination" style="margin-bottom: 15px;">
 <%= will_paginate @encuestas ,:class => "pagination"%>
   </div>
+
+<%= link_to 'Crear nueva encuesta', new_encuesta_url%>
