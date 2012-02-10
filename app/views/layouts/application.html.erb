@@ -73,7 +73,9 @@
       <div class="sidebar">
         <div class="well">
         <% if current_usuario_session %>
-          <%= current_usuario.login %>
+          <b>Login:</b><br/>
+          <%= current_usuario.login %><br/>
+          <b>Email:</b><br/>
           <%= current_usuario.email %>
         <% else %>
           <%= image_tag "sidebar.jpg", :size => "180x205" %>

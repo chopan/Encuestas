@@ -60,7 +60,7 @@ def destroy
     if encuesta_propia?(@encuesta) or current_usuario.is_admin?
       @encuesta.destroy
       respond_to do |format|
-          format.html { redirect_to encuestas_url }
+          format.html { redirect_to resultados_url }
           format.json { head :ok }
     end
     else

@@ -7,12 +7,13 @@
       <td style="width: 600px;"> <%= encuesta.nombre %></td>
       <td> <%= encuesta.concurrencia %></td>
       <td> <%= link_to "Ver resultados", grafica_resultados_url(encuesta)%></td>
+      <td> <%= link_to "el", encuesta_url(encuesta), :method => :delete %></td>
     </tr>
   
 <% end %>
    </tbody>
 </table>
 
-<%= link_to 'Crear nueva encuesta', new_encuesta_url %>
+<div class="digg_pagination" style="margin-bottom: 18px;"><%= will_paginate @encuestas %></div>
 
-  <%= will_paginate @encuestas %>
+<p><%= link_to 'Crear nueva encuesta', new_encuesta_url %></p>

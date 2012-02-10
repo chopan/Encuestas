@@ -72,15 +72,14 @@ $(document).ready(function() {
 
 </script>
 
-  <h3>Concurrencia de la encuesta: </h3> <%= @encuesta.concurrencia %>
 
 <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
 <% o = 0 %>
 <%= link_to "Mostrar los resultados para las preguntas abiertas", preguntas_abiertas_url(@encuesta) %>
 
-<div id="chart-container-1" style="width: 100%; height:  435px;"></div>
+<div id="chart-container-1" style="width: 100%; height:  435px; margin-top: 23px;"></div>
 
-<div style="margin-top: 12px;"><%= will_paginate @preguntas %></div>
+<div style="margin-top: 12px;" class="digg_pagination"><%= will_paginate @preguntas %></div>
 
 <script>
   $("#container").hide();

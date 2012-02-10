@@ -41,4 +41,18 @@ class UsuariosController < ApplicationController
       end
     end
   end
+
+  def destroy
+    usuario = Usuario.find params[:id]
+
+    respond_to do |format|
+      if usuario.destroy
+        format.html {flash[:notice] = "Usuario eliminado correctamente"
+          redirect_to usuarios_url}
+      else
+        format.html {flash[:error] = "Problemas a la hora de eliminar el usuario"
+          render "index"}
+      end
+    end
+  end
 end

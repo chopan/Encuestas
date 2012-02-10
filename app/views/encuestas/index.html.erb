@@ -1,6 +1,14 @@
-<h3>Mis encuestas</h3>
+<h2>Mis encuestas</h2>
 <br/>
-<table class="table zebra-striped">
+<table class="table zebra-striped" >
+  <thead>
+    <tr>
+      <th ><b>Nombre encuesta</b></th>
+      <th><%= image_tag "icon_edit.png", {:margin => 15}%></th>
+      <th><%= image_tag "icono_eliminar.png", :style => "height:23px; width:23px;" %></th>
+      <th><%= image_tag "icono_contestar.png", :style => "height:22px; width:22px;" %></th>
+    </tr>
+  </thead>
   <tbody>
 <% @encuestas.each do |encuesta| %>
 
@@ -26,4 +34,4 @@
 <%= will_paginate @encuestas ,:class => "pagination"%>
   </div>
 
-<%= link_to 'Crear nueva encuesta', new_encuesta_url%>
+<p><%= link_to 'Crear nueva encuesta', new_encuesta_url%></p>
