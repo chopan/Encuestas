@@ -12,7 +12,7 @@
   <% end %>
 
   Encuesta: <%= @encuesta.nombre %>
-  <% @encuesta.preguntas.each do |pregunta| %>
+  <% @preguntas.each do |pregunta| %>
   <br/><br/>
   <abbr><%= pregunta.texto %></abbr>
   <div style="margin: 11px; margin-left: 20px;">
@@ -32,6 +32,7 @@
     <% end %>
   </div>
   <% end %>
+  <div class="digg_pagination" style="margin-bottom: 17px;"><%= will_paginate @preguntas %></div>
   <%= hidden_field_tag :encuesta_id, @encuesta.id%>
   <%= f.submit "Guardar"  %>
 <% end %>

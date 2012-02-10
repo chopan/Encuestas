@@ -6,9 +6,9 @@ class EncuestasController < ApplicationController
 
  def index
    if current_usuario.is_admin?
-     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 15)
+     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 9)
    else
-     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
+     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 9)
    end
  end
 
@@ -71,6 +71,7 @@ end
 
 def contestar
     @encuesta = Encuesta.find(params[:id])
+    @preguntas = @encuesta.preguntas.paginate(:page => params[:page], :per_page => 5)
     respond_to do |format|
       format.html 
     end
@@ -207,9 +208,9 @@ def capturar_datos
 
   def resultados
     if current_usuario.is_admin?
-     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 15)
+     @encuestas = Encuesta.all.paginate(:page => params[:page], :per_page => 11)
    else
-     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 15)
+     @encuestas = (Encuesta.find_all_by_creador_id current_usuario.id).paginate(:page => params[:page], :per_page => 11)
    end
   end
 
