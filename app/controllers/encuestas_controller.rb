@@ -71,7 +71,7 @@ end
 
 def contestar
     @encuesta = Encuesta.find(params[:id])
-    @preguntas = @encuesta.preguntas.paginate(:page => params[:page], :per_page => 5)
+    @preguntas = @encuesta.preguntas
     respond_to do |format|
       format.html 
     end
@@ -85,86 +85,72 @@ def capturar_datos
   end
   estado = true
  sesion_id = request.session[:session_id]
- #Para las preguntas de una sola opcion
+
+
+
+ #Aqui se lleva a cabo el proceso de validacion, se recorre arreglo de parametros para verificar que
+ # todos los campos se llenaron correctamente. Se tiene un contador por cada tipo de pregunta
  contador_simples = 0
  contador_multiples = 0
  contador_abiertas = 0
+  #Para las preguntas de una sola opcion
  if params[:encuesta] != nil and estado
    params[:encuesta].values.each do |opcion_id|
-     opcion = Opcion.find(opcion_id)
-    # estado = crear_respuesta opcion
      contador_simples += 1
    end
  end
  params.each do |param|
    #Para las preguntas de opcion multiple
     if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
-      opcion = Opcion.find(param[0])
-
-     # estado = crear_respuesta opcion, param
       contador_multiples += 1
     else
       #Para las preguntas abiertas
-      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+      if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] != ""
           opcion = Opcion.find(param[0])
-
           if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
             contador_abiertas += 1
-           # estado = crear_respuesta opcion, param
           end
       end
     end
  end
 
-
- no_simples = @encuesta.preguntas.where("pregunta_tipo_id = 1")
- no_multiples = @encuesta.preguntas.where("pregunta_tipo_id = 2")
- no_abiertas = @encuesta.preguntas.where("pregunta_tipo_id = 3")
-
-  if contador_simples == no_simples and no_multiples == contador_multiples and contador_abiertas == no_abiertas
-
-
-  contador_simples = 0
- contador_multiples = 0
- if params[:encuesta] != nil and estado
-   params[:encuesta].values.each do |opcion_id|
-     opcion = Opcion.find(opcion_id)
-     estado = crear_respuesta opcion
-     contador_simples += 1
+ no_simples = @encuesta.preguntas.where("pregunta_tipo_id = 1").count
+ no_multiples = @encuesta.preguntas.where("pregunta_tipo_id = 2").count
+ no_abiertas = 0
+ @encuesta.preguntas.where("pregunta_tipo_id = 3").each do |pregunta|
+   pregunta.opciones.each do
+     no_abiertas += 1
    end
  end
- params.each do |param|
-   #Para las preguntas de opcion multiple
-    if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
-      opcion = Opcion.find(param[0])
-      estado = crear_respuesta opcion, param
-      contador_multiples += 1
-    else
-      #Para las preguntas abiertas
-      if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+
+  puts "/n/n#{no_simples}-#{contador_simples}/n/n#{no_multiples}-#{contador_multiples}/n/n#{contador_abiertas}-#{no_abiertas}-/n/n"
+ #Aqui se crean las respuestas, se lleva a cabo el mismo procedimiento que para la validacion, solo que aqui se
+ #  se buscan opciones y se procesan esos datos, ademas de mandar llamar metodo para crear respuesta en base de datos
+ if contador_simples == no_simples and contador_multiples >= no_multiples  and contador_abiertas == no_abiertas
+ 
+     if params[:encuesta] != nil and estado
+       params[:encuesta].values.each do |opcion_id|
+         opcion = Opcion.find(opcion_id)
+       end
+     end
+     params.each do |param|
+       #Para las preguntas de opcion multiple
+        if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] == "1"
           opcion = Opcion.find(param[0])
-          if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
-            estado = crear_respuesta opcion, param
+          estado = crear_respuesta opcion, param
+        else
+          #Para las preguntas abiertas
+          if /^[\d]+(\.[\d]+){0,1}$/ === param[0]
+              opcion = Opcion.find(param[0])
+              if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
+                estado = crear_respuesta opcion, param
+              end
           end
-      end
-    end
- end
-
-
-
+        end
+     end
   end
 
-
-
-
-
-
-
-
-
-
-
- if contador_simples == no_simples and no_multiples == contador_multiples and contador_abiertas == no_abiertas
+ if contador_simples == no_simples and no_multiples <= contador_multiples and contador_abiertas == no_abiertas
    
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia

@@ -1,4 +1,9 @@
 <table class="table zebra-striped">
+  <thead>
+  <td>Nombre de la encuesta</td>
+  <td>Concurrencia</td>
+  <td><i class="icon-indent-right"></i></td>
+  </thead>
   <tbody>
 <% @encuestas.each do |encuesta| %>
 
@@ -7,7 +12,7 @@
       <td style="width: 600px;"> <%= encuesta.nombre %></td>
       <td> <%= encuesta.concurrencia %></td>
       <td> <%= link_to "Ver resultados", grafica_resultados_url(encuesta)%></td>
-      <td> <%= link_to "el", encuesta_url(encuesta), :method => :delete %></td>
+ 
     </tr>
   
 <% end %>
