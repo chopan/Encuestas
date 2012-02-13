@@ -128,9 +128,10 @@ def capturar_datos
  #  se buscan opciones y se procesan esos datos, ademas de mandar llamar metodo para crear respuesta en base de datos
  if contador_simples == no_simples and contador_multiples >= no_multiples  and contador_abiertas == no_abiertas
  
-     if params[:encuesta] != nil and estado
+     if params[:encuesta] != nil 
        params[:encuesta].values.each do |opcion_id|
          opcion = Opcion.find(opcion_id)
+         crear_respuesta opcion
        end
      end
      params.each do |param|
