@@ -15,13 +15,14 @@
 
 <blockquote style="margin-bottom: 30px;">
   <p>
-    <%= f.label :nombre %><br />
+  <h3><%= f.label :nombre, "Nombre de la encuesta: ", :style => "margin-right: 10px;" %></h3><br/>
     <%= f.text_field :nombre %>
   </p>
 </blockquote>
   
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>
+<hr style=" height: 15px;color: #62c462;"></hr>
   <% end %>
 
   <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>

@@ -1,13 +1,15 @@
 <div class="fields">
 <p>
-  
-
-  <%= f.text_area :texto, :rows => 3 %>
-
-  <%= f.label :texto, "Tipo de pregunta" %>
-
+<div style="margin: 10px;">
+  <%= f.label :texto, "Tipo de pregunta", :style => "margin-right: 13px;" %>
   <%= f.collection_select :pregunta_tipo_id, PreguntaTipo.all, :id, :nombre%>
+</div>
+  
+<div style="margin-left: 15px;">
+  <%= f.label :texto, "Pregunta:", :style => "margin-right: 8px;" %>
+  <%= f.text_area :texto, :rows => 3 %>
   <%= link_to_remove_fields "Eliminar pregunta", f %>
+  </div>
 </p>
 
 <%= f.fields_for :opciones do |builder| %>
