@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def administrador?
     unless current_usuario_session and current_usuario.is_admin?
-      flash[:notice] = "Necesita ser administrador"
+      flash[:error] = "Necesita ser administrador"
       redirect_to encuestas_url
     end
   end

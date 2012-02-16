@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
-  before_filter :authenticate
-  before_filter :administrador?
+  #before_filter :authenticate
+  #before_filter :administrador?
   def index
     @usuarios = Usuario.all
   end

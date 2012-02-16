@@ -44,3 +44,5 @@ gem 'bootstrap-sass', '1.4.0'
 #Paginacion
 gem 'will_paginate', "3.0.2"
 
+#Autenticacion con ldap atravez de authlogic
+gem 'net-ldap'

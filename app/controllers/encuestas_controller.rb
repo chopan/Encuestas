@@ -17,7 +17,7 @@ def new
   #Pone por default el numero de preguntas que aparece al crear una nueva encuesta
     3.times do
       pregunta = @encuesta.preguntas.build
-      pregunta.opciones.build
+      2.times  {pregunta.opciones.build}
     end
 end
 

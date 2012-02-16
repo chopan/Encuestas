@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20120201190223) do
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"
 
   create_table "encuestados", :force => true do |t|
-    t.string   "session_id"
+    t.string   "sesion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20120201190223) do
     t.string   "login",               :limit => 100
     t.string   "apellido_paterno",    :limit => 100
     t.string   "apellido_materno",    :limit => 100
-    t.date     "fecha_alta",                         :default => '2011-09-20'
+    t.date     "fecha_alta",                         :default => '2012-02-16'
     t.string   "email",               :limit => 100
     t.string   "persistence_token",                                            :null => false
     t.string   "crypted_password",                                             :null => false

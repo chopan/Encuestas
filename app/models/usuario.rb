@@ -5,5 +5,11 @@ class Usuario < ActiveRecord::Base
     config.crypto_provider = Authlogic::CryptoProviders::MD5
   end
 
-easy_roles :roles
+  easy_roles :roles
+
+  protected
+    def valid_ldap_credentials?(password)
+      Ldap.valid?(self.login, password)
+    end
+
 end
