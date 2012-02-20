@@ -1,8 +1,12 @@
+
+<br/>
 <table class="table zebra-striped">
   <thead>
-  <td>Nombre de la encuesta</td>
-  <td>Concurrencia</td>
-  <td><i class="icon-indent-right"></i></td>
+    <tr>
+      <th>Nombre de la encuesta</th>
+      <th>Concurrencia</th>
+      <th><%= image_tag "grafica.png", :style => "  margin-left: 29px;" %></th>
+    </tr>
   </thead>
   <tbody>
 <% @encuestas.each do |encuesta| %>
@@ -10,9 +14,8 @@
       
     <tr>
       <td style="width: 600px;"> <%= encuesta.nombre %></td>
-      <td> <%= encuesta.concurrencia %></td>
+      <td style="text-align: center;"> <%= encuesta.concurrencia %></td>
       <td> <%= link_to "Ver resultados", grafica_resultados_url(encuesta)%></td>
- 
     </tr>
   
 <% end %>

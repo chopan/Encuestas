@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201190223) do
+ActiveRecord::Schema.define(:version => 20120220175612) do
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20120201190223) do
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"
 
   create_table "encuestados", :force => true do |t|
-    t.string   "sesion"
+    t.string   "session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
