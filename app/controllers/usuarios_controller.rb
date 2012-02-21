@@ -1,6 +1,7 @@
 class UsuariosController < ApplicationController
-  #before_filter :authenticate
-  #before_filter :administrador?
+  before_filter :authenticate
+  before_filter :administrador?
+  before_filter :add_random_password_if_ldap, :only => :create
   def index
     @usuarios = Usuario.all
   end
@@ -54,5 +55,13 @@ class UsuariosController < ApplicationController
           render "index"}
       end
     end
+  end
+
+  protected
+    def add_random_password_if_ldap
+      if Encuestas::Application.config.ldap_auth
+        random_password = ('A'..'z').to_a.shuffle[0..8].join
+        params[:usuario][:password] = random_password
+      end
   end
 end
