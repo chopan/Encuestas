@@ -1,12 +1,16 @@
-<ul class="unstyled">
-<% @preguntas.each do |pregunta| %>
-  <li><%= pregunta.texto %></li>
-  <br/>
-  <dl style="margin-bottom: 13px;">
-  <% pregunta.opciones.each do |opcion| %>
-    <li><%= link_to opcion.contenido, opcion_respuestas_url(pregunta.encuesta.id,pregunta.id,opcion.id)  %></li>
+<% if @preguntas.count == 0 %>
+  <h3>Esta encuesta no contiene preguntas abiertas</h3>
+<% else %>
+  <ul class="unstyled">
+  <% @preguntas.each do |pregunta| %>
+    <li><%= pregunta.texto %></li>
+    <br/>
+    <dl style="margin-bottom: 13px;">
+    <% pregunta.opciones.each do |opcion| %>
+      <li><%= link_to opcion.contenido, opcion_respuestas_url(pregunta.encuesta.id,pregunta.id,opcion.id)  %></li>
+    <% end %>
+      </dl>
   <% end %>
-    </dl>
+  </ul>
 <% end %>
-</ul>
 <%= link_to "Regresar", grafica_resultados_url(@encuesta_id)%>
