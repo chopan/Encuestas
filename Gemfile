@@ -34,7 +34,7 @@ group :test do
   gem 'turn', :require => false
 end
 
-gem "therubyracer", :require => 'v8'
+#gem "therubyracer","0.10.0"
 
 gem 'authlogic'
 gem 'easy_roles'
