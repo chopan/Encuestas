@@ -6,7 +6,7 @@ gem 'rails', '3.1.0'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'pg','0.12.2'
+gem 'pg'
 
 
 # Gems used only for assets and not required
@@ -34,7 +34,7 @@ group :test do
   gem 'turn', :require => false
 end
 
-gem "therubyracer", :require => 'v8'
+#gem "therubyracer","0.10.0"
 
 gem 'authlogic'
 gem 'easy_roles'
