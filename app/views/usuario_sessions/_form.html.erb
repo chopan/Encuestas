@@ -1,7 +1,7 @@
 <%= form_for(@usuario_session, :url => usuario_session_url) do |f| %>
   <% if @usuario_session.errors.any? %>
     <div id="error_explanation" class="error">
-      <h2>Imposible inicioar sesion, datos incorrectos</h2>
+      <h2>Imposible iniciar sesion, datos incorrectos</h2>
 
       <ul>
       <% @usuario_session.errors.full_messages.each do |msg| %>
