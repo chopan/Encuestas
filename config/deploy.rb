@@ -9,7 +9,7 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :deploy_to, "/webapps/#{application}"
 set :domain, "lugia.uach.mx"
-set :user, "rgonzalez"
+set :user, "rivazquez"
 set :rails_env, "production"
 set :use_sudo, true
 set :rvm_location, "/usr/local/rvm/gems/ruby-1.9.2-p290/bin"
