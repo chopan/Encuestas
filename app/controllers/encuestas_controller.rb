@@ -123,7 +123,11 @@ def capturar_datos
    end
  end
 
-  puts "/n/n#{no_simples}-#{contador_simples}/n/n#{no_multiples}-#{contador_multiples}/n/n#{contador_abiertas}-#{no_abiertas}-/n/n"
+  @encuesta.preguntas.where("pregunta_tipo_id = 3 and opcional = ?","true").each do |pregunta|
+    contador_abiertas += 1
+ end
+
+ 
  #Aqui se crean las respuestas, se lleva a cabo el mismo procedimiento que para la validacion, solo que aqui se
  #  se buscan opciones y se procesan esos datos, ademas de mandar llamar metodo para crear respuesta en base de datos
  if contador_simples == no_simples and contador_multiples >= no_multiples  and contador_abiertas == no_abiertas
