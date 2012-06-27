@@ -108,7 +108,7 @@ def capturar_datos
       if /^[\d]+(\.[\d]+){0,1}$/ === param[0] and param[1] != ""
           opcion = Opcion.find(param[0])
           if opcion.pregunta.pregunta_tipo.nombre == "Abierta"
-            contador_abiertas += 1
+            contador_abiertas += 1 unless opcion.pregunta.opcional == true
           end
       end
     end
@@ -155,7 +155,7 @@ def capturar_datos
      end
   end
 
- if contador_simples == no_simples and no_multiples <= contador_multiples and contador_abiertas == no_abiertas
+ if contador_simples == no_simples and no_multiples <= contador_multiples and contador_abiertas >= no_abiertas
    
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
