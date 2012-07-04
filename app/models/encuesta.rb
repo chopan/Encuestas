@@ -1,3 +1,4 @@
+require 'thread'
 class Encuesta < ActiveRecord::Base
 
   validates :nombre, :presence=>true
@@ -9,12 +10,15 @@ class Encuesta < ActiveRecord::Base
   accepts_nested_attributes_for :preguntas,  :allow_destroy => true
 
   def obtener_concurrencia
-    unless self.concurrencia.nil?
-      concurrencia = self.concurrencia + 1
-    else
-      concurrencia = 1
+    mutex = Mutex.new
+    mutex.synchronize do
+      unless self.concurrencia.nil?
+            concurrencia = self.concurrencia + 1
+      else
+        concurrencia = 1
+      end
+      return concurrencia
     end
-    return concurrencia
   end
 
 end
