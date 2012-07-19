@@ -19,20 +19,24 @@ def new
       pregunta = @encuesta.preguntas.build
       2.times  {pregunta.opciones.build}
     end
+    @x = 0
 end
 
 def create
   @encuesta = Encuesta.new(params[:encuesta])
   @encuesta.creador = current_usuario
   @encuesta.concurrencia = 0
+  x = 0
   @encuesta.preguntas.each do |pregunta|
       pregunta.encuesta_id = @encuesta.id
       pregunta.save
+      x = x +1
   end
   if @encuesta.save
     flash[:notice] = "Encuesta guardada correctamente"
     redirect_to encuesta_path(@encuesta)
   else
+    @x = 0
     render 'new'
   end
 end
@@ -123,7 +127,7 @@ def capturar_datos
    end
  end
 
-  @encuesta.preguntas.where("pregunta_tipo_id = 3 and opcional = ?","true").each do |pregunta|
+  @encuesta.preguntas.where("pregunta_tipo_id = 3 and (opcional = ? OR opcional = ?)","true", true).each do |pregunta|
     contador_abiertas += 1
  end
 
