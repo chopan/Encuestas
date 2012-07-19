@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120220175612) do
+ActiveRecord::Schema.define(:version => 20120626203741) do
 
   create_table "encuesta", :force => true do |t|
     t.integer  "creador_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120220175612) do
     t.boolean  "requerido"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "opcional"
   end
 
   create_table "pregunta_tipos", :force => true do |t|

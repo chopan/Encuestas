@@ -9,5 +9,5 @@
 
 OpcionTipo.create([{:tipo => "radio_button", :descripcion => "Representa un control tipo radio button"}, {:tipo => "check_box", :descripcion => "Representa un control tipo check box, el cual permite seleccionar varias opciones"}, {:tipo => "Abierta", :descripcion => "Permite agregar texto de manera libre"}])
 PreguntaTipo.create([{:nombre => "Sencilla", :descripcion => "Solo permite seleccionar una opcion"}, {:nombre => "Multiple", :descripcion => "Permite seleccionar varias respuestas de un grupo de opciones"}, {:nombre => "Abierta", :descripcion => "Permite contestar con texto una pregunta"}])
-Usuario.create(:login => "rgonzalez", :apellido_paterno => "Gonzalez", :apellido_materno => "Echavarria", :email => "rgechavarria@gmail.com", :password => "123pum", :password_confirmation => "123pum")
+Usuario.create(:login => "rgonzalez", :apellido_paterno => "Gonzalez", :apellido_materno => "Echavarria", :email => "rgechavarria@gmail.com", :password => "123pum")#, :password_confirmation => "123pum")
 

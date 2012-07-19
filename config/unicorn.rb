@@ -15,7 +15,7 @@ timeout 120
 # Listen on a Unix data socket
 #listen_socket = rails_env == 'production' ? '/webapps/uniq/current/tmp/unicorn.sock' : RAILS_ROOT+'tmp/unicorn.sock'
 #listen '/tmp/uniq_iv/unicorn.sock', :backlog => 2048
-listen 4050
+listen 5050
 
 
 ##
