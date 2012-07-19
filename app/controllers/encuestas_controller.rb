@@ -47,6 +47,7 @@ end
 
 def edit
   @encuesta = Encuesta.find(params[:id])
+  @x = 0
 end
 
 def update
