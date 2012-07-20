@@ -19,13 +19,24 @@
     <%= f.text_field :nombre %>
   </p>
 </blockquote>
-  
+
+<div id="encabezado">
+  <%= f.fields_for :encabezado do |builder|%>
+    <%= builder.text_area :texto, :rows => 3 %>
+  <% end %>
+</div>
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>
 <hr style=" height: 15px;color: #62c462;"></hr>
   <% end %>
 
-  <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
+<p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
+
+  <div id="pie_pagina">
+  <%= f.fields_for :footer do |builder|%>
+    <%= builder.text_area :texto, :rows => 3 %>
+  <% end %>
+</div>
 
   <p><%= f.submit "Submit" %></p>
 <% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  encuesta_id: 1
+  texto: MyString
+
+two:
+  encuesta_id: 1
+  texto: MyString

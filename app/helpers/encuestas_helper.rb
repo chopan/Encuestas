@@ -15,4 +15,5 @@ module EncuestasHelper
     link_to_function(name, raw("add_fields(this, '#{association}', '#{escape_javascript(fields)}')"))
  
   end
+
 end

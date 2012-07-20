@@ -14,12 +14,31 @@ class EncuestasController < ApplicationController
 
 def new
   @encuesta = Encuesta.new
+  @encuesta.build_encabezado
+  @encuesta.build_footer
   #Pone por default el numero de preguntas que aparece al crear una nueva encuesta
     3.times do
       pregunta = @encuesta.preguntas.build
-      2.times  {pregunta.opciones.build}
+      2.times  {pregunta.opciones.build
+          puts pregunta
+      }
+
     end
     @x = 0
+    session[:po_index] = 2
+end
+
+def increment_po_id
+  session[:po_index] = session[:po_index] + 1
+  respond_to do |format|
+    format.js 
+  end
+end
+
+def set_po_id
+  respond_to do |format|
+    format.js 
+  end
 end
 
 def create
@@ -37,6 +56,7 @@ def create
     redirect_to encuesta_path(@encuesta)
   else
     @x = 0
+    session[:po_index] = 2
     render 'new'
   end
 end
@@ -47,6 +67,8 @@ end
 
 def edit
   @encuesta = Encuesta.find(params[:id])
+  @encuesta.build_encabezado
+  @encuesta.build_footer
   @x = 0
 end
 
@@ -56,6 +78,8 @@ def update
     flash[:notice] = "Encuesta editada correctamente"
     redirect_to encuesta_url(@encuesta)
   else
+    @x = 0
+    session[:po_index] = 2
     render 'edit'
   end
 end

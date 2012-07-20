@@ -14,9 +14,16 @@
         $(link).closest(".fields").hide("drop");
       }
       function add_fields(link, association, content) {
+        
         var new_id = new Date().getTime();
         var regexp = new RegExp("new_" + association, "g")
         $(link).parent().before(content.replace(regexp, new_id));
+        if(association=='preguntas'){
+          $('.pregunta_opcional:last').hide();
+          $.post("<%= increment_po_id_url %>");
+        }
+        
+        
       }
     </script>
     <meta name="description" content="">

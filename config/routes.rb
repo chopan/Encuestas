@@ -1,4 +1,7 @@
 Encuestas::Application.routes.draw do
+  post "encuestas/new/set_po_id" => "encuestas#set_po_id", :as => :set_po_id
+  post "encuestas/new/increment_po_id" => "encuestas#increment_po_id", :as => :increment_po_id
+
    get "encuestas/prueba"
   delete "logout" => "usuario_sessions#destroy", :as => :logout
   resource :usuario_session

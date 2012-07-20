@@ -1,3 +1,6 @@
+<div>
+  <%= raw @encuesta.encabezado.texto unless @encuesta.encabezado.nil?%>
+</div>
 <blockquote>
   <b>Encuesta:</b> <address><%=  @encuesta.nombre %></address>
 
@@ -15,3 +18,7 @@
     </dl>
 <% end %>
   </blockquote>
+
+<div>
+  <%= raw @encuesta.footer.texto unless @encuesta.footer.nil?%>
+</div>
