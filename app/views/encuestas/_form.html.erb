@@ -1,3 +1,31 @@
+<script>
+  function agregar_encabezado(){
+    $('#agregar_encabezado').hide();
+    $('#quitar_encabezado').show();
+    $('#encabezado').show("slow");
+  }
+
+  function quitar_encabezado(){
+    $('#quitar_encabezado').hide();
+    $('#agregar_encabezado').show();
+    $('#encabezado').hide("slow");
+    $('#encabezado').children().attr("value", " ");
+  }
+
+  function agregar_pie_pagina(){
+    $('#agregar_pie_pagina').hide();
+    $('#quitar_pie_pagina').show();
+    $('#pie_pagina').show("slow");
+  }
+
+  function quitar_pie_pagina(){
+    $('#quitar_pie_pagina').hide();
+    $('#agregar_pie_pagina').show();
+    $('#pie_pagina').hide("slow");
+    $('#pie_pagina').children().attr("value", " ");
+  }
+</script>
+
 <%= form_for(@encuesta, :url => ruta, :method => metodo) do |f| %>
   <% if @encuesta.errors.any? %>
     <div id="error_explanation">
@@ -20,7 +48,10 @@
   </p>
 </blockquote>
 
-<div id="encabezado">
+  <a id="agregar_encabezado" href="#" onclick="agregar_encabezado();">Agregar encabezado</a>
+  <a id="quitar_encabezado" href="#" style="display: none;" onclick="quitar_encabezado();">Quitar encabezado</a>
+
+  <div id="encabezado" style="display: none;">
   <%= f.fields_for :encabezado do |builder|%>
     <%= builder.text_area :texto, :rows => 3 %>
   <% end %>
@@ -32,11 +63,13 @@
 
 <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
 
-  <div id="pie_pagina">
+  <div id="pie_pagina" style="display: none;">
   <%= f.fields_for :footer do |builder|%>
     <%= builder.text_area :texto, :rows => 3 %>
   <% end %>
 </div>
+<a id="agregar_pie_pagina" href="#encuesta_footer_attributes_texto" onclick="agregar_pie_pagina();">Agregar pie de pagina</a>
+<a id="quitar_pie_pagina" href="#encuesta_footer_attributes_texto" style="display: none;" onclick="quitar_pie_pagina();">Quitar pie de pagina</a>
 
   <p><%= f.submit "Submit" %></p>
 <% end %>
