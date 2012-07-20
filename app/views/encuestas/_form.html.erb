@@ -68,8 +68,8 @@
     <%= builder.text_area :texto, :rows => 3 %>
   <% end %>
 </div>
-<a id="agregar_pie_pagina" href="#encuesta_footer_attributes_texto" onclick="agregar_pie_pagina();">Agregar pie de pagina</a>
-<a id="quitar_pie_pagina" href="#encuesta_footer_attributes_texto" style="display: none;" onclick="quitar_pie_pagina();">Quitar pie de pagina</a>
+<a id="agregar_pie_pagina" href="#agregar_pie_pagina" onclick="agregar_pie_pagina();">Agregar pie de pagina</a>
+<a id="quitar_pie_pagina" href="#agregar_pie_pagina" style="display: none;" onclick="quitar_pie_pagina();">Quitar pie de pagina</a>
 
   <p><%= f.submit "Submit" %></p>
 <% end %>
