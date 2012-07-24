@@ -260,7 +260,7 @@ def capturar_datos
     end
 
   
-    
+    request.url == grafica_resultados_url
     unless encuesta.creador == current_usuario or current_usuario.is_admin?
       flash[:error] = "No tiene los permisos para acceder a esta encuesta"
       redirect_to encuestas_url
@@ -269,11 +269,13 @@ def capturar_datos
 
   def resultados_publicos?
     @encuesta = Encuesta.find(params[:id])
-    unless current_usuario_session 
+    unless current_usuario_session
       unless @encuesta.resultados_publicos
         flash[:error] = "No tiene los permisos para ver los resultados"
         render :inline => "<%= link_to 'Regresar a la encuesta', contestar_encuesta_url(#{@encuesta.id})%>", :layout => true
       end
+    else
+      encuesta_propia? unless @encuesta.resultados_publicos
     end
   end
 end
