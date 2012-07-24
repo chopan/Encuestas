@@ -28,6 +28,11 @@ class UsuariosController < ApplicationController
 
   def edit
     @usuario = Usuario.find(params[:id])
+    @usuario.roles = []
+     if params[:admin] == "1"
+      @usuario.add_role 'admin'
+    end
+    @usuario.save
   end
 
   def update
