@@ -1,7 +1,8 @@
 # encoding: UTF-8
 require 'will_paginate/array'
 class EncuestasController < ApplicationController
-  before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos]
+  before_filter :resultados_publicos?, :only => :grafica_resultados
+  before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos, :grafica_resultados]
   before_filter :encuesta_propia?, :only => [:show, :edit]
 
  def index
@@ -263,6 +264,16 @@ def capturar_datos
     unless encuesta.creador == current_usuario or current_usuario.is_admin?
       flash[:error] = "No tiene los permisos para acceder a esta encuesta"
       redirect_to encuestas_url
+    end
+  end
+
+  def resultados_publicos?
+    @encuesta = Encuesta.find(params[:id])
+    unless current_usuario_session 
+      unless @encuesta.resultados_publicos
+        flash[:error] = "No tiene los permisos para ver los resultados"
+        render :inline => "<%= link_to 'Regresar a la encuesta', contestar_encuesta_url(#{@encuesta.id})%>", :layout => true
+      end
     end
   end
 end
