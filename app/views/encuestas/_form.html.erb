@@ -41,42 +41,46 @@
   <% end %>
 
 
-<blockquote style="margin-bottom: 30px;">
-  <p>
-  <h3><%= f.label :nombre, "Nombre de la encuesta: ", :style => "margin-right: 10px;" %></h3><br/>
-    <%= f.text_field :nombre %>
-  </p>
-</blockquote>
+  <blockquote style="margin-bottom: 30px;">
+    <p>
+    <h3><%= f.label :nombre, "Nombre de la encuesta: ", :style => "margin-right: 10px;" %></h3><br/>
+      <%= f.text_field :nombre %>
+    </p>
+  </blockquote>
 
-<div>
-    <%= f.label :resultados_publicos, "Resultados públicos" %>
-    <%= f.check_box :resultados_publicos %>
+<div id="resultados_publicos">
+    <%= f.label :resultados_publicos, "Resultados públicos", :style => "margin-right:10px; padding-bottom:7px;" %>
+    <%= f.check_box :resultados_publicos, :style => "margin-top: 8px;" %>
   </div>
-
+<div style="margin: 20px;">
   <a id="agregar_encabezado" href="#" onclick="agregar_encabezado();">Agregar encabezado</a>
   <a id="quitar_encabezado" href="#" style="display: none;" onclick="quitar_encabezado();">Quitar encabezado</a>
-
+</div>
   <div id="encabezado" style="display: none;">
   <%= f.fields_for :encabezado do |builder|%>
-    <%= builder.text_area :texto, :rows => 3 %>
+    <%= builder.text_area :texto, :rows => 3, :style => "position:relative; width:100%; margin-bottom:20px;" %>
   <% end %>
-</div>
+  </div>
   <%= f.fields_for :preguntas do |builder| %>
     <%= render "preguntas", :f => builder %>
-<hr style=" height: 15px;color: #62c462;"></hr>
-  <% end %>
+  <hr style=" height: 15px;color: #62c462;"></hr>
+    <% end %>
 
-<p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
+  <p><%= link_to_add_fields "Agregar pregunta", f, :preguntas %></p>
 
   <div id="pie_pagina" style="display: none;">
   <%= f.fields_for :footer do |builder|%>
-    <%= builder.text_area :texto, :rows => 3 %>
+    <%= builder.text_area :texto, :rows => 3, :style => "position:relative; width:100%; margin-top:20px;" %>
   <% end %>
-</div>
-<a id="agregar_pie_pagina" href="#agregar_pie_pagina" onclick="agregar_pie_pagina();">Agregar pie de pagina</a>
-<a id="quitar_pie_pagina" href="#agregar_pie_pagina" style="display: none;" onclick="quitar_pie_pagina();">Quitar pie de pagina</a>
+  </div>
 
-  <p><%= f.submit "Submit" %></p>
+  <div style="margin: 20px;">
+    <a id="agregar_pie_pagina" href="#agregar_pie_pagina" onclick="agregar_pie_pagina();">Agregar pie de pagina</a>
+    <a id="quitar_pie_pagina" href="#agregar_pie_pagina" style="display: none;" onclick="quitar_pie_pagina();">Quitar pie de pagina</a>
+  </div>
+
+  <div><%= f.submit "Submit" %></div>
+
 <% end %>
 
 

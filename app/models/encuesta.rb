@@ -15,7 +15,7 @@ class Encuesta < ActiveRecord::Base
   
   def obtener_concurrencia
     mutex = Mutex.new
-    Thread.new do
+   
       mutex.synchronize do
         unless self.concurrencia.nil?
               concurrencia = self.concurrencia + 1
@@ -25,7 +25,7 @@ class Encuesta < ActiveRecord::Base
         return concurrencia
       end
     end
-  end
+  
 
 end
 
