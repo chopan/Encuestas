@@ -4,6 +4,7 @@ class EncuestasController < ApplicationController
   before_filter :resultados_publicos?, :only => :grafica_resultados
   before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos, :grafica_resultados]
   before_filter :encuesta_propia?, :only => [:show, :edit]
+   before_filter :fecha_limite_contestacion, :only => :contestar
 
  def index
    if current_usuario.is_admin?
@@ -276,6 +277,14 @@ def capturar_datos
       end
     else
       encuesta_propia? unless @encuesta.resultados_publicos
+    end
+  end
+
+  def fecha_limite_contestacion
+    encuesta = Encuesta.find params[:id]
+    if !encuesta.limite_contestar.nil? && Date.today > encuesta.limite_contestar.to_date
+      flash[:notice] = "Fecha pasada"
+      redirect_to root_path
     end
   end
 end

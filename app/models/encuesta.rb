@@ -2,6 +2,7 @@ require 'thread'
 class Encuesta < ActiveRecord::Base
 
   validates :nombre, :presence=>true
+  validate :validacion_fecha_limite_contestacion
   
   belongs_to :creador, :class_name => "Usuario"
   has_many :temas
@@ -25,7 +26,12 @@ class Encuesta < ActiveRecord::Base
         return concurrencia
       end
     end
-  
+
+  def validacion_fecha_limite_contestacion
+    if limite_contestar < Date.today
+      errors.add(:limite_contestar, "Fecha incorrecta")
+    end
+  end
 
 end
 
