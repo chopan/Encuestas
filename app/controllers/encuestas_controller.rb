@@ -62,6 +62,8 @@ def create
   else
     @x = 0
     session[:po_index] = 2
+    @encuesta.build_encabezado
+  	@encuesta.build_footer
     render 'new'
   end
 end
@@ -75,6 +77,7 @@ def edit
   @encuesta.build_encabezado
   @encuesta.build_footer
   @x = 0
+  session[:po_index] = 2
 end
 
 def update
@@ -85,6 +88,8 @@ def update
   else
     @x = 0
     session[:po_index] = 2
+    @encuesta.build_encabezado
+  @encuesta.build_footer
     render 'edit'
   end
 end
