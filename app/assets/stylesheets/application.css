@@ -1,0 +1,25 @@
+/* 
+    Document   : application
+    Created on : 30/07/2012, 10:46:22 AM
+    Author     : rolando
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.margen-derecha{
+    margin-right: 10px;
+}
+
+.alineacion{
+    padding-bottom:7px;
+}
+
+.margen-superior{
+    margin: 8px;
+}
+

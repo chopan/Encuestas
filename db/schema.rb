@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20120727202008) do
     t.datetime "updated_at"
     t.integer  "concurrencia"
     t.boolean  "resultados_publicos"
-    t.datetime "limite_contestar"
+    t.date     "limite_contestar"
   end
 
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"

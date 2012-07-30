@@ -53,6 +53,9 @@ def create
       pregunta.save
       x = x +1
   end
+
+  @encuesta.limite_contestar = params[:encuesta][:limite_contestar].to_date
+
   if @encuesta.save
     flash[:notice] = "Encuesta guardada correctamente"
     redirect_to encuesta_path(@encuesta)
