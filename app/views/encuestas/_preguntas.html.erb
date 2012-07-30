@@ -32,8 +32,8 @@
     </div>
     <% if @x < 3 %>
       <div id="po<%= @x %>"class="pregunta_opcional" style="margin: 15px;">
-        <%= f.label "Opcional?" %>
-        <%= f.check_box(:opcional) %>
+        <%= f.label "Opcional?", :class => "margen-derecha" %>
+        <%= f.check_box(:opcional)%>
         <% @x = @x + 1 %>
       </div>
     <% else %>
