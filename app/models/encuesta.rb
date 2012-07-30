@@ -28,7 +28,7 @@ class Encuesta < ActiveRecord::Base
     end
 
   def validacion_fecha_limite_contestacion
-    if limite_contestar < Date.today
+    if !limite_contestar.nil? && limite_contestar < Date.today
       errors.add(:limite_contestar, "Fecha incorrecta")
     end
   end
