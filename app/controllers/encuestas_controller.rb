@@ -72,8 +72,8 @@ end
 
 def edit
   @encuesta = Encuesta.find(params[:id])
-  @encuesta.build_encabezado
-  @encuesta.build_footer
+  @encuesta.build_encabezado if @encuesta.encabezado.nil?
+  @encuesta.build_footer if @encuesta.footer.nil?
   @x = 0
 end
 

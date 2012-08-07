@@ -1,40 +1,49 @@
+<div style="margin-bottom: 30px;">
+  <%= raw @encuesta.encabezado.texto unless @encuesta.encabezado.nil?%>
+</div>
 
-<br/><br/>
-<%= form_for(@encuesta, :url => capturar_url, :method => :post) do |f| %>
-  <% if @encuesta.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@encuesta.errors.count, "error") %> impiden guardar esta encuesta:</h2>
+<blockquote>
+    <br/><br/>
+    <%= form_for(@encuesta, :url => capturar_url, :method => :post) do |f| %>
+      <% if @encuesta.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@encuesta.errors.count, "error") %> impiden guardar esta encuesta:</h2>
 
-      <ul>
-      <% @encuesta.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          <ul>
+          <% @encuesta.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  Encuesta: <%= @encuesta.nombre %>
-  <% @preguntas.each do |pregunta| %>
-  <br/><br/>
-  <abbr><%= pregunta.texto %></abbr>
-  <div style="margin: 11px; margin-left: 20px;">
-    <% pregunta.opciones.each do |opcion| %>
-      <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Sencilla") %>
-        <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
-      <% else %>
-        <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Multiple") %>
-          <%= check_box_tag opcion.id %>
-        <% else %>
-          <%= text_field_tag opcion.id %>
+      Encuesta: <%= @encuesta.nombre %>
+      <% @preguntas.each do |pregunta| %>
+      <br/><br/>
+      <abbr><%= pregunta.texto %></abbr>
+      <div style="margin: 11px; margin-left: 20px;">
+        <% pregunta.opciones.each do |opcion| %>
+          <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Sencilla") %>
+            <%=  f.radio_button(pregunta.id,opcion.id,:checked => false, :class => "checkbox") %>
+          <% else %>
+            <% if pregunta.pregunta_tipo == PreguntaTipo.find_by_nombre("Multiple") %>
+              <%= check_box_tag opcion.id %>
+            <% else %>
+              <%= text_field_tag opcion.id %>
+            <% end %>
+          <% end %>
+
+
+          <%= opcion.contenido %>
         <% end %>
+      </div>
       <% end %>
 
-      
-      <%= opcion.contenido %>
+      <%= hidden_field_tag :encuesta_id, @encuesta.id%>
+      <%= f.submit "Guardar"  %>
     <% end %>
-  </div>
-  <% end %>
- 
-  <%= hidden_field_tag :encuesta_id, @encuesta.id%>
-  <%= f.submit "Guardar"  %>
-<% end %>
+</blockquote>
+
+<div style="margin-top: 35px;">
+  <%= raw @encuesta.footer.texto unless @encuesta.footer.nil?%>
+</div>
