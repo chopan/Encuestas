@@ -20,6 +20,9 @@
 }
 
 .margen-superior{
-    margin: 8px;
+    margin-top: 15px;
 }
 
+.margen-izquierdo-nil{
+    margin-left: 0px;
+}

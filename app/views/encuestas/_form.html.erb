@@ -53,11 +53,11 @@
   </div>
 
   <div style="margin-top: 10px;">
-    <%= f.label :limite_contestar, :class => "margen-derecha" %>
+    <%= f.label :limite_contestar,"Fecha limite para contestar", :class => "margen-derecha" %>
     <%= f.text_field :limite_contestar, :id => "datepicker"  %>
   </div>
 
-  <div id="resultados_publicos">
+  <div id="resultados_publicos" class="margen-izquierdo-nil margen-superior margen-derecha">
     <%= f.label :resultados_publicos, "Resultados públicos", :class => "margen-derecha alineacion" %>
     <%= f.check_box :resultados_publicos, :class => "margen-superior" %>
   </div>
