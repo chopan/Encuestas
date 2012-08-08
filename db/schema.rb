@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727202008) do
+ActiveRecord::Schema.define(:version => 20120808201738) do
 
   create_table "encabezados", :force => true do |t|
     t.integer  "encuesta_id"
-    t.string   "texto"
+    t.text     "texto",       :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
