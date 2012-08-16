@@ -4,7 +4,7 @@ class EncuestasController < ApplicationController
   before_filter :resultados_publicos?, :only => :grafica_resultados
   before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos, :grafica_resultados]
   before_filter :encuesta_propia?, :only => [:show, :edit]
-   before_filter :fecha_limite_contestacion, :only => :contestar
+  before_filter :fecha_limite_contestacion, :requiere_login?, :only => :contestar
 
  def index
    if current_usuario.is_admin?
@@ -295,4 +295,15 @@ def capturar_datos
       redirect_to root_path
     end
   end
+
+  def requiere_login?
+    @encuesta = Encuesta.find params[:id]
+    unless current_usuario_session
+      if @encuesta.login
+         session[:return_to] = request.url
+        redirect_to new_usuario_session_url
+      end
+    end
+  end
+
 end

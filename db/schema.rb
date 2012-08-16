@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808201738) do
+ActiveRecord::Schema.define(:version => 20120815214620) do
 
   create_table "encabezados", :force => true do |t|
     t.integer  "encuesta_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20120808201738) do
     t.integer  "concurrencia"
     t.boolean  "resultados_publicos"
     t.date     "limite_contestar"
+    t.boolean  "login"
   end
 
   add_index "encuesta", ["creador_id"], :name => "index_encuesta_on_creador_id"

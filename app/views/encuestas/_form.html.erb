@@ -62,6 +62,11 @@
     <%= f.check_box :resultados_publicos, :class => "margen-superior" %>
   </div>
 
+  <div class="margen-izquierdo-nil margen-superior margen-derecha">
+    <%= f.label :login, "Requiere login?", :class => "margen-derecha alineacion" %>
+    <%= f.check_box :login, :class => "margen-superior"  %>
+  </div>
+
   <div style="margin: 20px;">
     <a id="agregar_encabezado" href="#" onclick="agregar_encabezado();">Agregar encabezado</a>
     <a id="quitar_encabezado" href="#" style="display: none;" onclick="quitar_encabezado();">Quitar encabezado</a>

@@ -17,6 +17,13 @@ class ApplicationController < ActionController::Base
       flash[:error] = "Necesitas iniciar sesion"
       redirect_to new_usuario_session_path
       return false
+    else
+      if current_usuario.is_encuestado?
+        flash[:error] = "Permisos insuficientes"
+        current_usuario_session.destroy
+        redirect_to new_usuario_session_path
+        return false
+      end
     end
   end
 

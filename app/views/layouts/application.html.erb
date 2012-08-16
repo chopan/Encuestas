@@ -56,23 +56,26 @@
       <div class="topbar-inner">
         <div class="container-fluid">
           <a class="brand" href="#">Encuestas</a>
-          <ul class="nav">
-          
-          
-            <li class="active"><a href="/">Home</a></li>
-            <% if current_usuario_session %>
-                <li><%= link_to "Encuestas", encuestas_url %></li>
-                <li><%= link_to  "Resultados", resultados_url%></li>
-                <% if current_usuario.is_admin? %>
-                  <li><%= link_to  "Usuarios", usuarios_url%></li>
+          <% if current_usuario_session %>
+            <% unless current_usuario.is_encuestado? %>
+              <ul class="nav">
+
+
+                <li class="active"><a href="/">Home</a></li>
+                <% if current_usuario_session %>
+                    <li><%= link_to "Encuestas", encuestas_url %></li>
+                    <li><%= link_to  "Resultados", resultados_url%></li>
+                    <% if current_usuario.is_admin? %>
+                      <li><%= link_to  "Usuarios", usuarios_url%></li>
+                    <% end %>
+                    <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
+
+                <% else %>
+                          <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
                 <% end %>
-                <li id="tt"><%= link_to "Cerrar sesion", logout_path, :method => :delete %></li>
-               
-            <% else %>
-                      <li><%= link_to "Iniciar sesion", new_usuario_session_path %></li>
+              </ul>
             <% end %>
-          </ul>
-          
+          <% end %>
         </div>
       </div>
     </div>
