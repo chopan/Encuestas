@@ -9,10 +9,12 @@ Encuestas::Application.routes.draw do
   get "encuestas/resultados" => "encuestas#resultados", :as => :resultados
   resources :encuestas
 
-  
+  get "agradecimiento_web" => "encuestas#gracias_web", :as => :encuesta_gracias_web
   get "agradecimiento" => "encuestas#gracias", :as => :encuesta_gracias
   get "encuestas/:id/preguntas_abiertas/:pregunta_id/opcion/:opcion_id/respuestas" => "encuestas#opcion_respuestas", :as => :opcion_respuestas
   get "encuestas/:id/preguntas_abiertas" => "encuestas#preguntas_abiertas", :as => :preguntas_abiertas
+
+  get "encuestas/:id/contestar_web/" => "encuestas#contestar_web", :as => :contestar_web
   get "encuestas/:id/contestar/" => "encuestas#contestar", :as => :contestar_encuesta
   post "encuestas/capturar_datos" => "encuestas#capturar_datos", :as => :capturar
   get "encuestas/:id/grafica" => "encuestas#grafica_resultados", :as => :grafica_resultados

@@ -5,6 +5,7 @@ class EncuestasController < ApplicationController
   before_filter :authenticate, :except => [:contestar, :gracias, :capturar_datos, :grafica_resultados]
   before_filter :encuesta_propia?, :only => [:show, :edit]
   before_filter :fecha_limite_contestacion, :requiere_login?, :only => :contestar
+  
 
  def index
    if current_usuario.is_admin?
@@ -116,6 +117,13 @@ def contestar
     end
 end
 
+def contestar_web
+  @encuesta = Encuesta.find(params[:id])
+  @preguntas = @encuesta.preguntas
+  session[:last_request] = request.url
+  render :layout => false
+end
+
 def capturar_datos
   @encuestado = encuestado_actual
   @encuesta = Encuesta.find params[:encuesta_id]
@@ -199,7 +207,13 @@ def capturar_datos
    flash[:notice] = "Datos guardados"
     @encuesta.concurrencia = @encuesta.obtener_concurrencia
     @encuesta.save
-    redirect_to encuesta_gracias_url
+    if session[:last_request] == contestar_web_url(@encuesta.id)
+      session[:last_request] = nil
+      redirect_to encuesta_gracias_web_url
+    else
+      redirect_to encuesta_gracias_url
+    end
+    
    else
      
      flash[:error]= "Llene todos los campos porfavor"
@@ -234,6 +248,10 @@ def capturar_datos
 
   def gracias
     
+  end
+
+  def gracias_web
+    render :layout => false
   end
 
   def resultados
